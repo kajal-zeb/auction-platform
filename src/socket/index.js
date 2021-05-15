@@ -14,7 +14,7 @@ const SocketTest = () => {
 
   return (
     <p>
-      It's <time dateTime={response}>{response}</time>
+      <time dateTime={response}>{response}</time>
     </p>
   );
 }

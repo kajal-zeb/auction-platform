@@ -1,13 +1,11 @@
 import React from 'react';
 import SocketTest from './socket';
-import Sprite from './components/atoms/Sprite/Sprite';
+import { ParentWrapper } from './components/organisms'
 
 const App = () => {
 	return (
 		<>
-			<div>
-				<p>Welcome to Bitcoin Pizza...</p>
-			</div>
+			<ParentWrapper/>
 			<SocketTest />
 		</>
 	);
