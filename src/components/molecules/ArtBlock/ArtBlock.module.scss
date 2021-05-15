@@ -1,0 +1,13 @@
+.artBlockContainer {
+    display: flex;
+    justify-content: center;
+    margin: 10px 0px 20px;
+    width: 100%;
+    .artBlock {
+        width: 85%;
+        border-radius: 10px;
+        img {
+            width: 100%;
+        }
+    }
+}

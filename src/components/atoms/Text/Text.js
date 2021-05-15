@@ -11,7 +11,7 @@ const Text = ({spacing,size,italics,ellipsis,weight,children,theme,align,capital
                 classes[theme]:'dark'} ${align ? classes[align] : ''} ${
                 capitalize ? classes.capitalize : ''
             } ${italics? classes.italics.toString():''} ${ellipsis? classes.ellipsis.toString():''} `}
-            style={{ fontWeight: weight, marginBottom: noMargin ? '0' : '' }} >
+            style={{ fontWeight: weight, margin: noMargin ? '0' : '' }} >
             {children}
         </p>
     );

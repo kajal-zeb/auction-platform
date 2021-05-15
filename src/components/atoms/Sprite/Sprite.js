@@ -4,7 +4,7 @@ import sprite from '../../../assets/svgs/icon-sprite.svg';
 
 const Sprite = props => {
     return (
-        <svg  viewBox={`0 0 ${props.width} ${props.height}`} width={`${props.width}px`} height={`${props.height}px`} style={props.styles}>
+        <svg  viewBox={`0 0 ${props.width} ${props.height}`} width={`${props.width}px`} height={`${props.height}px`} {...props}>
             <use  href={`${sprite}#${props.id}`}></use>
         </svg>
     );

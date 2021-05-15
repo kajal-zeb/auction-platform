@@ -1,6 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <svg xmlns="http://www.w3.org/2000/svg">
 
+	<symbol viewBox="0 0 22 16" id="refresh">
+		<path d="M21.3 7.96774L18.255 10.9539M18.255 10.9539L15.21 7.96774M18.255 10.9539L18.2711 8.01792C18.2711 4.14203 15.0672 1 11.1149 1C9.62251 1 8.23679 1.44803 7.09 2.21442M1 7.96774L4.045 4.98157M4.045 4.98157L7.09 7.96774M4.045 4.98157V7.98208C4.045 11.858 7.24893 15 11.2012 15C12.6936 15 14.0793 14.552 15.2261 13.7856" stroke="white" stroke-linecap="round"/>
+	</symbol>
+
+	<symbol viewBox="0 0 31 30" id="place-bid">
+		<path fill-rule="evenodd" clip-rule="evenodd" d="M29.7867 14.0642C30.5287 14.4314 30.5287 15.4896 29.7867 15.8568L2.90841 29.1571C2.24376 29.4859 1.4649 29.0024 1.4649 28.2608V18.0623L15.4671 14.9582L1.4649 11.535L1.4649 1.66026C1.4649 0.918685 2.24376 0.435096 2.90841 0.763986L29.7867 14.0642Z" stroke="#161616" stroke-linejoin="round"/>
+	</symbol>
+
 	<symbol viewBox="0 0 8 11"  id="map-pointer">
 		<path fill-rule="evenodd" clip-rule="evenodd" d="M4 10C4 10 7 6.85 7 4C7 2.34315 5.65685 1 4 1C2.34315 1 1 2.34315 1 4C1 6.85 4 10 4 10Z" stroke="#2072EF" fill="transparent"/>
 		<path fill-rule="evenodd" clip-rule="evenodd" d="M4 4.5C4.27614 4.5 4.5 4.27614 4.5 4C4.5 3.72386 4.27614 3.5 4 3.5C3.72386 3.5 3.5 3.72386 3.5 4C3.5 4.27614 3.72386 4.5 4 4.5Z" stroke="#2072EF" fill="transparent"/>
