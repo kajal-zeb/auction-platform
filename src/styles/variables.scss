@@ -1,0 +1,38 @@
+
+:root {
+    --bg-color: #161616;
+    --white: #fff;
+    --text-color: #000000;
+    --primary-color: #FEAC00;
+    --primary-dark: #FEAC00;
+    --primary-light: #FFD30D;
+    --primary-hover:#6ca2f4;
+    --primary-light-opaque: rgb(209 227 246);
+    --gray: #888888;
+    --light-gray: #F2F2F2, 71%;
+    --red: #f5222d;
+    --border: #d8d8d8;
+  }
+  
+  $primary-color: var(--primary-color); // primary color for all components
+  $primary-light: var(--primary-light-opaque); // primary color for all components
+  $primary-dark: var(--primary-dark); // primary color for all components
+  $link-color: var(--primary-color); // link color
+  $success-color: #52c41a; // success state color
+  $warning-color: #faad14; // warning state color
+  $error-color: #f5222d; // error state color
+  $font-size-base: 14px; // major text font size
+  $heading-color: rgba(0, 0, 0, 0.85); // heading text color
+  $text-color: rgba(0, 0, 0, 0.65); // major text color
+  $text-color-secondary: rgba(0, 0, 0, 0.45); // secondary text color
+  $disabled-color: #b4b5b8; // disable state color
+  // $disabled-color: rgba(0, 0, 0, 0.25); // disable state color
+  $border-radius-base: 2px; // major border radius
+  $border-color-base: #d9d9d9; // major border color
+  $box-shadow-base: 0 3px 6px -4px rgba(0, 0, 0, 0.12), 0 6px 16px 0 rgba(0, 0, 0, 0.08),
+    0 9px 28px 8px rgba(0, 0, 0, 0.05); // major shadow for layerss
+  
+  
+  $black: #2d2d2d;
+  $mid-gray: #666;
+  
