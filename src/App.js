@@ -1,5 +1,6 @@
 import React from 'react';
 import SocketTest from './socket';
+import Sprite from './components/atoms/Sprite/Sprite';
 
 const App = () => {
 	return (

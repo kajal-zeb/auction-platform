@@ -1,0 +1,85 @@
+@import '../../../styles/variables.scss';
+p.text {
+  word-break: break-word;
+  margin-bottom: 20px;
+  font-weight: 400;
+  // margins
+  line-height: 1.4;
+  &.xs {
+    margin-bottom: 10px;
+  }
+  &.sm {
+    margin-bottom: 20px;
+  }
+  &.md {
+    margin-bottom: 30px;
+  }
+  &.lg {
+    margin-bottom: 40px;
+  }
+  &.xl {
+    margin-bottom: 60px;
+  }
+  &.none {
+    margin-bottom: 0;
+  }
+  // colors
+  &.dark {
+    color: var(--text-color);
+  }
+  &.light {
+    color: #fff;
+  }
+  &.red {
+    color: var(--red);
+  }
+  &.gray {
+    color: var(--gray);
+  }
+  &.lightgray {
+    color: var(--light-gray);
+  }
+  &.yellow {
+    color: #e7df29;
+  }
+  &.green {
+    color: #29bd1c;
+  }
+  // Alignment
+  &.right {
+    text-align: right;
+  }
+  &.left {
+    text-align: left;
+  }
+  &.center {
+    text-align: center;
+  }
+
+  // letter styling
+  &.capitalize {
+    text-transform: capitalize;
+  }
+  &.italics {
+    font-style: italic;
+  }
+  // size
+  &.fontxs {
+    font-size: 1rem;
+  }
+  &.fontsm {
+    font-size: 1.2rem;
+  }
+  &.fontmd {
+    font-size: 1.4rem;
+  }
+  &.fontlg {
+    font-size: 1.6rem;
+  }
+  &.ellipsis {
+    height: 1.4rem;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+}
