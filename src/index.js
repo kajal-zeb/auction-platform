@@ -3,10 +3,11 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
+import { isMobileOnly } from 'react-device-detect';
 
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+    {isMobileOnly ? <App /> : <div>this app is available only on mobile!</div>}
   </React.StrictMode>,
   document.getElementById('root')
 );
