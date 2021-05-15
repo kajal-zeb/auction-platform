@@ -9553,6 +9553,11 @@ react-error-overlay@^6.0.9:
   resolved "https://registry.yarnpkg.com/react-error-overlay/-/react-error-overlay-6.0.9.tgz#3c743010c9359608c375ecd6bc76f35d93995b0a"
   integrity sha512-nQTTcUu+ATDbrSD1BZHr5kgSD4oF8OFjxun8uAaL8RwPBacGBNPf/yAuVVdx17N8XNzRDMrZ9XcKZHCjPW+9ew==
 
+react-horizontal-scroll-menu@^0.0.3:
+  version "0.0.3"
+  resolved "https://registry.yarnpkg.com/react-horizontal-scroll-menu/-/react-horizontal-scroll-menu-0.0.3.tgz#6e8b5a3a2c7b8cb8825ac39908cff40b44597ef1"
+  integrity sha512-ZWQlbahDXRs0JmUpiXWSZDJXIgYx6iusin7hn9CsgsgHlRa7dtJ3GhswcQCRlxMcdIb4OhSeEqumPP8G6sEmBQ==
+
 react-inner-image-zoom@^2.0.1:
   version "2.0.1"
   resolved "https://registry.yarnpkg.com/react-inner-image-zoom/-/react-inner-image-zoom-2.0.1.tgz#ead397e67720b8a95644e2953c2b6ab5a056da66"

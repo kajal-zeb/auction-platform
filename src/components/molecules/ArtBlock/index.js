@@ -1,22 +1,19 @@
 import React, {useEffect, useState } from 'react';
 import { Image} from 'antd';
 import sample from "../../../assets/samples/sample_pizza.jpg"
-
+import classes from './ArtBlock.module.scss';
 import InnerImageZoom from 'react-inner-image-zoom';
 
 
 const Art = (props) => {
     return (
-       <div >
+       <div className={`${classes.artBlockContainer}`}>
            <InnerImageZoom  
                 src={sample} 
-                width={'500px'}
-                zoomSrc={sample} 
-                // fullscreenOnMobile={true}
-                // zoomScale={0.9}
+                className={`${classes.artBlock}`}
+                zoomSrc={sample}
                 zoomType={'hover'}
                 moveType={'drag'}
-            // zoomSrc='/path/to/zoom-image.jpg'
              />
        </div>
     )

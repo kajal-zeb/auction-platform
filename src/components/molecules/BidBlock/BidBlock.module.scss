@@ -1,0 +1,13 @@
+.listItem {
+  width: 200px;
+  padding: 5px;
+  white-space: break-spaces;
+  display: inline-block;
+  background: var(--gray);
+  margin: 0px 5px;
+  border-radius: 20px;
+  font-size: 14px;
+  &.active {
+    background: var(--primary-dark);
+  }
+}

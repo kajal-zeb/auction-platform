@@ -1,3 +1,29 @@
 @import 'variables.scss';
+@import 'react-inner-image-zoom/lib/InnerImageZoom/styles.css';
 
-@import 'react-inner-image-zoom/lib/InnerImageZoom/styles.css'
+#root {
+  height: 100%;
+  font-size: 10px;
+}
+html,
+body {
+  font-family: 'Roboto', sans-serif;
+  font-size: 10px;
+  overflow: hidden;
+  margin: 0;
+  background: var(--bg-color);
+  color: var(--white);
+}
+
+.pad-all-10 {
+  padding: 10px;
+}
+.flex {
+  display: flex;
+}
+.text-align-center {
+  text-align: center;
+}
+.pad-bottom-0 {
+    padding-bottom: 0px;
+}
