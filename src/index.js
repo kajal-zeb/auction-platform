@@ -4,7 +4,6 @@ import './styles/app.scss';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { isMobileOnly } from 'react-device-detect';
-
 if (isMobileOnly) {
   ReactDOM.render(
     <React.StrictMode>
@@ -17,6 +16,7 @@ if (isMobileOnly) {
     <React.StrictMode>
       <div>only supports mobile view!</div>
     </React.StrictMode>
+    , document.getElementById('root')
   )
 }
 
