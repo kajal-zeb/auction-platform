@@ -1,5 +1,6 @@
 import { Input, Form, Button } from 'antd';
 import React from 'react';
+import Logo from '../../atoms/Logo/Logo';
 import Sprite from '../../atoms/Sprite/Sprite';
 import classes from './Login.module.scss';
 
@@ -11,7 +12,7 @@ const Login = () => {
 
   return (
     <div className={`${classes.loginView}`}>
-      <Sprite id='bitcoin' width={70} height={70} />
+      <Logo width={150} height={'auto'} />
       <div className={`${classes.inputArea}`}>
         <Form
           initialValues={{
