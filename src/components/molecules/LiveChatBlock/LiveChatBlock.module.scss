@@ -1,0 +1,10 @@
+.comments {
+  height: 340px;
+  overflow-y: scroll;
+  overflow-x: hidden;
+  .selected {
+    background: var(--primary-dark);
+    border-radius: 25px;
+    color: var(--bg-color) !important;
+  }
+}

@@ -13,6 +13,7 @@ body {
   margin: 0;
   background: var(--bg-color);
   color: var(--white);
+  height: 100%;
 }
 
 .pad-all-10 {
@@ -25,5 +26,8 @@ body {
   text-align: center;
 }
 .pad-bottom-0 {
-    padding-bottom: 0px;
+  padding-bottom: 0px;
+}
+.mt10 {
+  margin-top: 10px;
 }
