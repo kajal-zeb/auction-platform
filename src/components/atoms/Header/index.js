@@ -8,7 +8,7 @@ import Avatar from '../Avatar/index';
 
 const Header = (props) => {
   return (
-    <>
+    <div>
       <div className={`pad-all-10 pad-bottom-0`}>
         <div className={`flex ${classes.headerStyle}`}>
           <Sprite id='bitcoin' width={40} height={40} />
@@ -31,7 +31,7 @@ const Header = (props) => {
           <Text noMargin size={'md'} spacing={'md'} weight={600}><span style={{ color: 'var(--white)' }}>Jatin Kukreja</span></Text>
         </div>
       </div>
-    </>
+    </div>
   );
 };
 export default Header;
