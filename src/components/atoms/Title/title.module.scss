@@ -1,0 +1,54 @@
+@import '../../../styles/variables.scss';
+.heading {
+    margin-bottom: 20px;
+    margin-top: 0;
+    // spacings
+    &.xxs {
+        margin-bottom: 5px;
+    }
+    &.xs {
+        margin-bottom: 10px;
+    }
+    &.sm {
+        margin-bottom: 20px;
+    }
+    &.md {
+        margin-bottom: 30px;
+    }
+    &.lg {
+        margin-bottom: 40px;
+    }
+    &.xl {
+        margin-bottom: 60px;
+    }
+    &.none {
+        margin-bottom: 0;
+    }
+    // color
+    &.dark {
+        color: var(--text-color);
+    }
+    &.light {
+        color: #fff;
+    }
+    &.red {
+        color: $primary-color;
+    }
+    // Alignment
+    &.right {
+        text-align: right;
+    }
+    &.left {
+        text-align: left;
+    }
+    &.center {
+        text-align: center;
+    }
+    // Letter sizing
+    &.capitalize {
+        text-transform: capitalize;
+    }
+    &.uppercase{
+        text-transform: uppercase;
+    }
+}

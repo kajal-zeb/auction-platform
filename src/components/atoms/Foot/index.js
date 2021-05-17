@@ -8,7 +8,7 @@ const Foot = (props) => {
   const { Title } = Typography;
 
   return (
-    <Title level={1}>
+    <Title level={1} style={{fontWeight:'600'}}>
       {true ? (
         'PLACE BID'
       ) : (

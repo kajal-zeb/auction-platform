@@ -7,7 +7,25 @@ import classes from './LiveChatBlock.module.scss';
 const LiveChat = (props) => {
   const comments = [
     {
-      name: 'Karan Parsnani',
+      name: 'Abdul Kalam Parsnani',
+      comment: `Kitna inaam rakhi hai sarkar hum par?
+            Sardar pure 4789597 Satoshi`,
+      time: '1m ago',
+    },
+    {
+      name: 'Rahul Parsnani',
+      comment: `Kitna inaam rakhi hai sarkar hum par?
+            Sardar pure 4789597 Satoshi`,
+      time: '1m ago',
+    },
+    {
+      name: 'Sharma Kartik',
+      comment: `Kitna inaam rakhi hai sarkar hum par?
+            Sardar pure 4789597 Satoshi`,
+      time: '1m ago',
+    },
+    {
+      name: 'Kajal Dalai',
       comment: `Kitna inaam rakhi hai sarkar hum par?
             Sardar pure 4789597 Satoshi`,
       time: '1m ago',
@@ -19,31 +37,13 @@ const LiveChat = (props) => {
       time: '1m ago',
     },
     {
-      name: 'Karan Parsnani',
+      name: 'Rahil Shaikh',
       comment: `Kitna inaam rakhi hai sarkar hum par?
             Sardar pure 4789597 Satoshi`,
       time: '1m ago',
     },
     {
-      name: 'Karan Parsnani',
-      comment: `Kitna inaam rakhi hai sarkar hum par?
-            Sardar pure 4789597 Satoshi`,
-      time: '1m ago',
-    },
-    {
-      name: 'Karan Parsnani',
-      comment: `Kitna inaam rakhi hai sarkar hum par?
-            Sardar pure 4789597 Satoshi`,
-      time: '1m ago',
-    },
-    {
-      name: 'Karan Parsnani',
-      comment: `Kitna inaam rakhi hai sarkar hum par?
-            Sardar pure 4789597 Satoshi`,
-      time: '1m ago',
-    },
-    {
-      name: 'Karan Parsnani',
+      name: 'Chinmay Gargawa',
       comment: `Kitna inaam rakhi hai sarkar hum par?
             Sardar pure 4789597 Satoshi`,
       time: '1m ago',
@@ -51,23 +51,21 @@ const LiveChat = (props) => {
   ];
 
   return (
-    <>
-      <hr />
       <div className={`${classes.comments}`}>
         {comments.map((comment, index) => {
           return (
             <Row
               key={index}
-              gutter={8}
-              className={`mb20 pad-all-10 flex ${
+              gutter={11}
+              className={`${classes.chatItem} ${
                 index === 4 ? classes.selected : undefined
               }`}
             >
-              <Col className='gutter-row' span={3}>
-                <Avatar initial={comment.name[0].toUpperCase()} />
+              <Col className='gutter-row' flex={'52px'} >
+                <Avatar name={comment.name} width={40} height={40}/>
               </Col>
-              <Col className='gutter-row' span={15}>
-                <Text size={'md'} noMargin>
+              <Col className='gutter-row' flex={'auto'}>
+                <Text size={'md'} noMargin weight={600}>
                   {comment.name}
                 </Text>
                 <Text
@@ -78,10 +76,11 @@ const LiveChat = (props) => {
                   {comment.comment}
                 </Text>
               </Col>
-              <Col className='gutter-row' span={6}>
+              <Col className='gutter-row' flex={'68px'}>
                 <Text
                   size={'sm'}
                   noMargin
+                  align={'right'}
                   theme={index !== 4 ? 'gray' : undefined}
                 >
                   {comment.time}
@@ -91,7 +90,6 @@ const LiveChat = (props) => {
           );
         })}
       </div>
-    </>
   );
 };
 export default LiveChat;
