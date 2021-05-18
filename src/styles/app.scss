@@ -31,3 +31,19 @@ body {
 .mt10 {
   margin-top: 10px;
 }
+
+
+.transition-hide {
+  width: 0;
+  padding: 0 !important;
+  overflow: hidden;
+  transition: all 0.1s ease-in-out;
+  flex: 0 !important;
+  opacity: 0;
+  &.show {
+    opacity: 1;
+    padding: inherit !important;
+    transition: all 0.3s ease-in-out;
+    flex: 1 !important;
+  }
+}

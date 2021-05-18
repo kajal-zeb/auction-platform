@@ -8,18 +8,18 @@ import Sprite from '../../atoms/Sprite/Sprite';
 const Bid = (props) => {
   const bidOptions = [200, 400, 600];
   const { Title } = Typography;
-
+  // const list = [
+  //   {key: `"Kitna inaam rakhi hai sarkar hum par? Sardar pure _____ Satoshi”`,}
+  // ];
   // list of items
   const list = [
     {
       key: `"Kitna inaam rakhi hai sarkar hum par? Sardar pure _____ Satoshi”`,
     },
-    { key: `"_____ Satoshi Bitcoin ki keemat tume kya  jaano Ramesh babu!”` },
-    { key: `Mujhe nai khelna ye. Mai apna BAT le ke jaara hun` },
+    { key: `"_____ Satoshi Bitcoin ki keemat tume kya jaano Ramesh babu!”` },
+    { key:  "Mujhe nai khelna ye. Mai apna BAT le ke jaara hun" }
   ];
 
-  // One item component
-  // selected prop will be passed
   const MenuItem = ({ text, selected }) => {
     return (
       <div
@@ -32,14 +32,15 @@ const Bid = (props) => {
 
   // All items component
   // Important! add unique key
-  const Menu = (list, selected) =>
-    list.map((el) => {
-      const { key } = el;
-
-      return <MenuItem text={key} key={key} selected={selected} />;
-    });
-
-  const selected = list[0]['key'];
+  const Menu = (list, selected) =>{
+    if(list && list.length) {
+      list.map((el) => {
+        const { key } = el;
+        return <MenuItem text={key} key={key} selected={selected} />;
+      });
+    }
+  }
+  const selected = (list && list.length) ? list[0]['key'] : null;
 
   const menu = Menu(list, selected);
 
