@@ -9,7 +9,12 @@ const { Footer } = Layout;
 
 const ParentWrapper = (props) => {
   const isLoggedIn = false;
+  const [ showBidBlock,setShowBidBlock ] = useState(false);
 
+  const onSelectionChange = (value) => {
+    setShowBidBlock(value)
+    console.log(showBidBlock);
+  };
   return (
     <>
       {!isLoggedIn ? (
@@ -23,11 +28,15 @@ const ParentWrapper = (props) => {
             </div>
             
             }
-          </Content>
-          <Footer
-            className={`${classes.footerStyle} ${classes.footerPosition}`}
-          >
-            <Foot />
+             <Bid 
+                style={{'z-index': '10'}}
+                className={`${
+                  showBidBlock ? 'show' : ''
+                } transition-hide`}
+              /> 
+            </Content>
+          <Footer className={`${classes.footerStyle} ${classes.footerPosition}`} >
+            <Foot openBidBlock={onSelectionChange}/>
           </Footer>
         </Layout>
       ) : (
