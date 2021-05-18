@@ -6,11 +6,18 @@ import Text from '../Text/Text';
 
 const Foot = (props) => {
   const { Title } = Typography;
+  const [ openBid,setOpenBid ] = useState(false);
 
+  const openBlock = (value) => {
+    setOpenBid(!value)
+    props.openBidBlock(openBid)
+  }
   return (
     <Title level={1} style={{fontWeight:'600'}}>
       {true ? (
-        'PLACE BID'
+        <div onClick={()=> openBlock(openBid)}>
+          PLACE BID
+        </div>
       ) : (
         <>
           <Sprite id='place-bid' width={31} height={30} />

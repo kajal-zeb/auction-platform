@@ -1,106 +1,162 @@
 import React, { useEffect, useState } from 'react';
 import ScrollMenu from 'react-horizontal-scroll-menu';
 import Text from '../../atoms/Text/Text';
+import Title from "../../atoms/Title"
 import classes from './BidBlock.module.scss';
-import { Typography } from 'antd';
+import { Button, Typography } from 'antd';
 import Sprite from '../../atoms/Sprite/Sprite';
 
 const Bid = (props) => {
   const bidOptions = [200, 400, 600];
-  const { Title } = Typography;
-
+  const currentBid = 498938
+  // const { Title } = Typography;
+  const [currentMessage,setCurrentMessage] = useState(null);
+  const [newBid,setnewBid] = useState(currentBid);
+  const [incrementer,setIncrementer] = useState(0)
+  const [isBidPlaced,setIsBidPlaced] = useState(false)
+  // const list = [
+  //   {key: `"Kitna inaam rakhi hai sarkar hum par? Sardar pure _____ Satoshi”`,}
+  // ];
   // list of items
-  const list = [
+  const list1 = [
     {
-      key: `"Kitna inaam rakhi hai sarkar hum par? Sardar pure _____ Satoshi”`,
+      width:250,key:1,msg: `"Kitna inaam rakhi hai sarkar hum par? Sardar pure _____ Satoshi”`,
     },
-    { key: `"_____ Satoshi Bitcoin ki keemat tume kya jaano Ramesh babu!”` },
-    { key: `Mujhe nai khelna ye. Mai apna BAT le ke jaara hun` },
+    { width:250,key:2,msg: `"_____ Satoshi Bitcoin ki keemat tume kya jaano Ramesh babu!”` },
+    { width:250,key:3,msg: `Mujhe nai khelna ye. Mai apna BAT le ke jaara hun` },
 
-    { key: `Mujhe nai khelna ye. Mai apna BAT le ke jaara hun` },
-    { key: `Mujhe nai khelna ye. Mai apna BAT le ke jaara hun` },
-    { key: `Mujhe nai khelna ye. Mai apna BAT le ke jaara hun` },
-    { key: `Mujhe nai khelna ye. Mai apna BAT le ke jaara hun` },
-    { key: `Mujhe nai khelna ye. Mai apna BAT le ke jaara hun` },
+    { width:260,key:4,msg: `Mujhe nai khelna ye. Mai apna BAT le ke jaara hun` },
+    { width:220,key:5,msg: `Mujhe nai khelna ye. Mai apna BAT le ke jaara hun` },
+    { width:220,key:6,msg: `Mujhe nai khelna ye. Mai apna BAT le ke jaara hun` },
+    { width:220,key:7,msg: `Mujhe nai khelna ye. Mai apna BAT le ke jaara hun` },
+    { width:200,key:8,msg: `Mujhe nai khelna ye. Mai apna BAT le ke jaara hun` },
+  ];
+  const list2 = [
+    {
+      width:260,key:9,msg: `"Kitna inaam rakhi hai sarkar hum par? Sardar pure _____ Satoshi”`,
+    },
+    { width:250,key:10,msg: `"_____ Satoshi Bitcoin ki keemat tume kya jaano Ramesh babu!”` },
+    { width:220,key:11,msg: `Mujhe nai khelna ye. Mai apna BAT le ke jaara hun` },
+    { width:220,key:12,msg: `Mujhe nai khelna ye. Mai apna BAT le ke jaara hun` },
+    { width:250,key:13,msg: `Mujhe nai khelna ye. Mai apna BAT le ke jaara hun` },
+    { width:250,key:14,msg: `Mujhe nai khelna ye. Mai apna BAT le ke jaara hun` },
+    { width:250,key:15,msg: `Mujhe nai khelna ye. Mai apna BAT le ke jaara hun` },
+    { width:250,key:16,msg: `Mujhe nai khelna ye. Mai apna BAT le ke jaara hun` },
   ];
 
+  const setMessage = (value)=>{
+    const updatedValue = currentBid + incrementer
+    setCurrentMessage({...value,valuemsg:value.msg.replace('_____',`<b>${currentBid + incrementer}</b>`)})
+    console.log({valuemsg:value.msg.replace('____',`<b>${updatedValue}</b>`)})
+    console.log(currentBid + incrementer)
+  }
+  useEffect(()=>{
+    if(incrementer&&currentMessage!=null) setMessage({...currentMessage})
+  },[incrementer])
+  
+  const animateSuccess=()=>{
+    setIsBidPlaced(true);
+    setTimeout(() => {
+      setIsBidPlaced(false);
+      props.onClose()
+    }, 2000);
+  }
   return (
     <div className={`${classes.bidBlockContainer}`}>
+      {isBidPlaced?
+
+      <div className={classes.success}>
+          <span>
+            <Sprite id="tick" width={40} height={40}/>
+          </span>
+          <Title tag="h2" theme="light" weight="600" spacing={'sm'} size={'lg'} align={'center'}>
+            Bid Successful
+          </Title>
+      </div>
+      :null}
+      <div>
+        <div>
+          <Title tag="h2" theme="orange" weight="600" spacing={'sm'} size={'lg'} align={'center'}>
+          {incrementer===0? 'Place':''}  Your Bid
+          </Title>
+          <div className={classes.newBid}>
+              <div className={classes.inputWrapper}>
+                <input value={currentBid + incrementer}/>
+                  <Sprite
+                    id='refresh'
+                    width={22}
+                    height={16}
+                  />
+              </div>
+          </div>
+          <Text align={'center'} size={'md'} spacing={'sm'}>
+            ~₹500
+          </Text>
+        </div>
+        <div className={'pad-all-10 flex'}>
+          {bidOptions.map((option, index) => {
+            return (
+              <span 
+                key={index} 
+                className={`${classes.bidOptions} ${incrementer == option?classes.selected:''}`} 
+                onClick={()=>setIncrementer(option)}>
+                  +{option}
+              </span>
+            );
+          })}
+        </div>
+        <hr style={{ width: '30%',margin:'20px auto',borderColor:'#aaa' }} />
+        <div className={`text-align-center`}>
+          {currentMessage?
+          <>
+            <Text weight={600}  size={'lg'} spacing={'xs'}>
+              Your message
+            </Text>
+            <Text size={'md'} spacing={'md'} noMargin id='message'>
+              <span dangerouslySetInnerHTML={{__html: currentMessage.valuemsg}} ></span>
+            </Text>
+          </>
+          :
+            <Text size={'lg'} spacing={'md'} weight={600} id='message'>
+              Choose a message
+            </Text>
+          }
+        </div>
+      </div>
       <div
         className={`${classes.oneLiner}`}
-        style={{ columnCount: parseInt(Math.ceil(list.length / 3)) }}
       >
-        {list.map((key, index) => {
-          return (
-            <div key={index} className={`${classes.listItem}`}>
-              <Text noMargin spacing={'md'} size={'md'}>
-                {key.key}
-              </Text>
-            </div>
-          );
-        })}
+        <div className={classes.lineRow}>
+          {list1.map((item, index) => {
+            return (
+              <div key={index} className={`${classes.listItem} ${currentMessage&& currentMessage.key === item.key?classes.selectedLiner:''}`} style={{minWidth:item.width+'px'}} onClick={()=>setMessage(item)}>
+                <Text noMargin spacing={'md'} size={'md'}>
+                  {item.msg}
+                </Text>
+              </div>
+            );
+          })}
+        </div>
+        <div className={classes.lineRow}>
+          {list2.map((item, index) => {
+            return (
+              <div key={index} className={`${classes.listItem} ${currentMessage&&currentMessage.key === item.key?classes.selectedLiner:''}`} style={{minWidth:item.width+'px'}} onClick={()=>setMessage(item)}>
+                <Text noMargin spacing={'md'} size={'md'}>
+                  {item.msg}
+                </Text>
+              </div>
+            );
+          })}
+        </div>
+
       </div>
-      <div>
-        <Text noMargin spacing={'md'} size={'md'} align={'center'}>
-          Your Bid
-        </Text>
-        <Text align={'center'} noMargin>
-          <Title level={1}>
-            <span
-              style={{
-                padding: '10px',
-                background: 'var(--bg-color-2)',
-              }}
-            >
-              49,59,890 S&nbsp;
-              <Sprite
-                id='refresh'
-                width={22}
-                height={16}
-                style={{
-                  position: 'relative',
-                  top: '2px',
-                }}
-              />
-            </span>
-          </Title>
-        </Text>
-        <Text align={'center'} noMargin size={'sm'} spacing={'sm'}>
-          ~₹500
-        </Text>
-      </div>
-      <div className={'pad-all-10 flex'}>
-        {bidOptions.map((option, index) => {
-          return (
-            <span
-              style={{
-                background: 'var(--primary-dark)',
-                padding: '6px 15px',
-                borderRadius: '20px',
-                flexGrow: '0',
-                flexBasis: '33.33333333%',
-                textAlign: 'center',
-                margin: '0px 10px',
-              }}
-              key={index}
-            >
-              <Title level={1}>+{option}</Title>
-            </span>
-          );
-        })}
-      </div>
-      <hr style={{ width: '30%' }} />
-      <div className={`text-align-center`}>
-        <Text weight={600} noMargin size={'md'} spacing={'md'}>
-          Your message
-        </Text>
-        <Text size={'md'} spacing={'md'} noMargin id='message'>
-          "Kitna inaam rakhi hai sarkar hum par? Sardar pure{' '}
-          <span style={{ color: 'var(--primary-color)', fontWeight: '600' }}>
-            49,59,890
-          </span>{' '}
-          Satoshi”
-        </Text>
+      <div className={classes.bottomButtons}>
+          <a className={classes.back} onClick={props.onClose}>
+            <Sprite id="cross" width={20} height={20}/>
+          </a>
+          <a  className={classes.confirm} onClick={animateSuccess}>
+            CONFIRM
+          </a>
       </div>
     </div>
   );

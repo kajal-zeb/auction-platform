@@ -9,7 +9,12 @@ const { Footer } = Layout;
 
 const ParentWrapper = (props) => {
   const isLoggedIn = false;
+  const [ showBidBlock,setShowBidBlock ] = useState(false);
 
+  const onSelectionChange = (value) => {
+    setShowBidBlock(value)
+    console.log(showBidBlock);
+  };
   return (
     <>
       {!isLoggedIn ? (
@@ -17,20 +22,20 @@ const ParentWrapper = (props) => {
           <Header />
           <Content style={{ height: 'calc(100% - 209px)' }}>
             <Art />
-            {true ? (
-              <div className={classes.bidBlockWrapper}>
-                <Bid />
+            <div className={classes.liveChatWrapper}>
+              <LiveChat />
+              <div  
+                  className={`${
+                    showBidBlock ? 'show' : ''
+                  } transition-hide`}>
+
+              <Bid  onClose={()=> onSelectionChange(false)}/> 
               </div>
-            ) : (
-              <div className={classes.liveChatWrapper}>
-                <LiveChat />
-              </div>
-            )}
-          </Content>
-          <Footer
-            className={`${classes.footerStyle} ${classes.footerPosition}`}
-          >
-            <Foot />
+            </div>
+            </Content>
+          <Footer className={`${classes.footerStyle} ${classes.footerPosition}`} onClick={()=> onSelectionChange(!showBidBlock)}>
+            {/* <Foot openBidBlock={()=>onSelectionChange(!showBidBlock)}/> */}
+            PLACE BID
           </Footer>
         </Layout>
       ) : (
