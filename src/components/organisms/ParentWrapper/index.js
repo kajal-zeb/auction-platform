@@ -13,7 +13,7 @@ const ParentWrapper = (props) => {
   return (
     <>
       {!isLoggedIn ? (
-        <Layout style={{ height: '100%' }} id='auction'>
+        <Layout style={{ height: '100vh' }} id='auction'>
           <Header />
           <Content style={{height: 'calc(100% - 209px)'}}>
             <Art />
