@@ -8,11 +8,8 @@ const Avatar = (props) => {
     const char2 = props.name[props.name.indexOf(" ") + 1];
   
     randomNum = (char1.charCodeAt() + char2.charCodeAt())/1000;
-    console.log(randomNum);
-    
   }
   const background = `#${Math.floor(randomNum * 16777215).toString(16).padStart(6, '0')}`;
-  console.log(background);
   const getContrast =  (hexcolor)=>{
 
     // If a leading # is provided, remove it
@@ -32,7 +29,6 @@ const Avatar = (props) => {
     return (yiq >= 128) ? 'black' : 'white';
   
   };
-  console.log(getContrast(background));
   const Color = getContrast(background);
   return (
     <>
