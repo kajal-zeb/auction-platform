@@ -29,7 +29,7 @@ Text.propTypes = {
     size: PropTypes.oneOf(['xs','sm', 'md', 'lg']),
     italics: PropTypes.bool,
     capitalize: PropTypes.bool,
-    weight: PropTypes.string,
+    weight: PropTypes.number,
     ellipsis: PropTypes.bool
 };
 

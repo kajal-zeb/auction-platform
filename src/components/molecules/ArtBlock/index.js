@@ -1,6 +1,6 @@
 import React, {useEffect, useState } from 'react';
 import { Image} from 'antd';
-import sample from "../../../assets/samples/sample_pizza.jpg"
+import sample from "../../../assets/images/canvas.png"
 import classes from './ArtBlock.module.scss';
 import InnerImageZoom from 'react-inner-image-zoom';
 

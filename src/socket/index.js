@@ -6,8 +6,8 @@ const SocketTest = () => {
 	const [response, setResponse] = useState('');
 
 	useEffect(() => {
-		const socket = io('http://localhost:3003');
-		socket.on('HighestBid', (data) => {
+		const socket = io('http://65.2.79.23');
+		socket.on('CurrentDate', (data) => {
 			console.log('Data > ', data);
 			setResponse(data);
 		});
