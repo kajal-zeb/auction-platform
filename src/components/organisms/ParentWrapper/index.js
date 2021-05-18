@@ -15,14 +15,17 @@ const ParentWrapper = (props) => {
       {!isLoggedIn ? (
         <Layout style={{ height: '100vh' }} id='auction'>
           <Header />
-          <Content style={{height: 'calc(100% - 209px)'}}>
+          <Content style={{ height: 'calc(100% - 209px)' }}>
             <Art />
-            {false ? <Bid /> : 
-            <div className={classes.liveChatWrapper}>
-              <LiveChat />
-            </div>
-            
-            }
+            {true ? (
+              <div className={classes.bidBlockWrapper}>
+                <Bid />
+              </div>
+            ) : (
+              <div className={classes.liveChatWrapper}>
+                <LiveChat />
+              </div>
+            )}
           </Content>
           <Footer
             className={`${classes.footerStyle} ${classes.footerPosition}`}

@@ -14,40 +14,31 @@ const Bid = (props) => {
     {
       key: `"Kitna inaam rakhi hai sarkar hum par? Sardar pure _____ Satoshi”`,
     },
-    { key: `"_____ Satoshi Bitcoin ki keemat tume kya  jaano Ramesh babu!”` },
+    { key: `"_____ Satoshi Bitcoin ki keemat tume kya jaano Ramesh babu!”` },
+    { key: `Mujhe nai khelna ye. Mai apna BAT le ke jaara hun` },
+
+    { key: `Mujhe nai khelna ye. Mai apna BAT le ke jaara hun` },
+    { key: `Mujhe nai khelna ye. Mai apna BAT le ke jaara hun` },
+    { key: `Mujhe nai khelna ye. Mai apna BAT le ke jaara hun` },
+    { key: `Mujhe nai khelna ye. Mai apna BAT le ke jaara hun` },
     { key: `Mujhe nai khelna ye. Mai apna BAT le ke jaara hun` },
   ];
 
-  // One item component
-  // selected prop will be passed
-  const MenuItem = ({ text, selected }) => {
-    return (
-      <div
-        className={`${classes.listItem} ${selected ? `${classes.active}` : ''}`}
-      >
-        {text}
-      </div>
-    );
-  };
-
-  // All items component
-  // Important! add unique key
-  const Menu = (list, selected) =>
-    list.map((el) => {
-      const { key } = el;
-
-      return <MenuItem text={key} key={key} selected={selected} />;
-    });
-
-  const selected = list[0]['key'];
-
-  const menu = Menu(list, selected);
-
   return (
-    <>
-      <hr />
-      <div style={{ margin: '0px 0px 10px' }}>
-        <ScrollMenu data={menu} selected={selected} />
+    <div className={`${classes.bidBlockContainer}`}>
+      <div
+        className={`${classes.oneLiner}`}
+        style={{ columnCount: parseInt(Math.ceil(list.length / 3)) }}
+      >
+        {list.map((key, index) => {
+          return (
+            <div key={index} className={`${classes.listItem}`}>
+              <Text noMargin spacing={'md'} size={'md'}>
+                {key.key}
+              </Text>
+            </div>
+          );
+        })}
       </div>
       <div>
         <Text noMargin spacing={'md'} size={'md'} align={'center'}>
@@ -105,11 +96,13 @@ const Bid = (props) => {
         </Text>
         <Text size={'md'} spacing={'md'} noMargin id='message'>
           "Kitna inaam rakhi hai sarkar hum par? Sardar pure{' '}
-          <span style={{ color: 'var(--primary-color)', fontWeight: '600' }}>49,59,890</span>{' '}
+          <span style={{ color: 'var(--primary-color)', fontWeight: '600' }}>
+            49,59,890
+          </span>{' '}
           Satoshi”
         </Text>
       </div>
-    </>
+    </div>
   );
 };
 export default Bid;

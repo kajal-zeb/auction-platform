@@ -1,13 +1,21 @@
-.listItem {
-  width: 200px;
-  padding: 5px;
-  white-space: break-spaces;
-  display: inline-block;
-  background: var(--gray);
-  margin: 0px 5px;
-  border-radius: 20px;
-  font-size: 14px;
-  &.active {
-    background: var(--primary-dark);
+.bidBlockContainer {
+  height: 100%;
+  padding: 20px;
+  overflow-y: scroll;
+  overflow-x: hidden;
+  .oneLiner {
+    overflow-x: scroll;
+    white-space: nowrap;
+    min-width: 100%;
+    max-width: 600px;
+    .listItem {
+      background: var(--bg-color-2);
+      padding: 10px;
+      border-radius: 15px;
+      font-size: 16px;
+      &.active {
+        background: var(--primary-dark);
+      }
+    }
   }
 }
