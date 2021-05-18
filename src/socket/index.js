@@ -7,7 +7,7 @@ const SocketTest = () => {
 
 	useEffect(() => {
 		const socket = io('http://localhost:3003');
-		socket.on('CurrentDate', (data) => {
+		socket.on('HighestBid', (data) => {
 			console.log('Data > ', data);
 			setResponse(data);
 		});
