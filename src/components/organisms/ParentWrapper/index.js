@@ -8,9 +8,11 @@ import axios from 'axios';
 import { API_ENDPOINTS } from '../../../api';
 import { useHistory } from 'react-router-dom';
 import { ENV_CONFIG } from '../../../config';
+import Logo from '../../atoms/Logo/Logo';
+import Text from '../../atoms/Text/Text';
+
 const { Content } = Layout;
 const { Footer } = Layout;
-const { Text } = Typography;
 
 const ParentWrapper = (props) => {
 	const history = useHistory();
