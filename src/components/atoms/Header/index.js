@@ -7,42 +7,45 @@ import Avatar from '../Avatar/index';
 import Logo from '../Logo/Logo';
 
 const Header = (props) => {
+	const [highestBid, setHighestBid] = useState(null);
 
-  const [highestBid, setHighestBid] = useState(null);
+	useEffect(() => {
+		if (localStorage.getItem('currentbid')) {
+			setHighestBid(JSON.parse(localStorage.getItem('currentbid')));
+		}
+	}, [localStorage.getItem('currentbid')]);
 
-  useEffect(() => {
-    if (parseFloat(JSON.parse(localStorage.getItem('currentbid'))['currentHighestBid'])) {
-      setHighestBid(parseFloat(JSON.parse(localStorage.getItem('currentbid'))['currentHighestBid']))
-    }
-  }, [localStorage.getItem('currentbid')]);
-
-  return (
-    <div>
-      <div className={`pad-all-10`}>
-        <div className={`flex ${classes.headerStyle}`}>
-          <Logo height={50} width={'auto'} />
-          {/* <Text noMargin size={'lg'} weight={600}>
+	return (
+		<div>
+			<div className={`pad-all-10`}>
+				<div className={`flex ${classes.headerStyle}`}>
+					<Logo height={50} width={'auto'} />
+					{/* <Text noMargin size={'lg'} weight={600}>
             1 Satoshi = 0.00000001 BTC
           </Text> */}
-        </div>
-      </div>
-      <div className={`text-align-center`}>
-        <Text noMargin size={'md'} spacing={'md'}>
-          Highest Bid
-        </Text>
-      </div>
-      <div className={`${parentClasses.footerStyle} ${classes.subHeaderStyle}`}>
-        <Title tag={'h2'} spacing={'none'} weight={600}>
-          {highestBid} S
-        </Title>
-        <div className={`flex`}>
-          <Avatar name={'Jatin Kukreja'} />
-          <Text noMargin size={'md'} spacing={'md'} weight={600}>
-            <span style={{ color: 'var(--white)' }}>Jatin Kukreja</span>
-          </Text>
-        </div>
-      </div>
-    </div>
-  );
+				</div>
+			</div>
+			<div className={`text-align-center`}>
+				<Text noMargin size={'md'} spacing={'md'}>
+					Highest Bid
+				</Text>
+			</div>
+			<div className={`${parentClasses.footerStyle} ${classes.subHeaderStyle}`}>
+				<Title tag={'h2'} spacing={'none'} weight={600}>
+					{highestBid?.currentHighestBid} S
+				</Title>
+				<div className={`flex`}>
+					{highestBid?.highestBidderName && (
+						<Avatar name={highestBid?.highestBidderName} />
+					)}
+					<Text noMargin size={'md'} spacing={'md'} weight={600}>
+						<span style={{ color: 'var(--white)' }}>
+							{highestBid?.highestBidderName}
+						</span>
+					</Text>
+				</div>
+			</div>
+		</div>
+	);
 };
 export default Header;

@@ -43,11 +43,13 @@ const Bid = (props) => {
         } else if (data && data.error === '') {
           setBidPlacedMessage(data.message);
         }
+        setIncrementer(0)
         setLoading(false);
         setIsBidPlaced(true);
       })
       .catch((e) => {
         setLoading(false);
+        setIncrementer(0)
         setBidPlacedMessage('Unable to place bid');
         setIsBidPlaced(true);
       });
@@ -145,7 +147,7 @@ const Bid = (props) => {
   const setMessage = (value) => {
     setCurrentMessage({
       ...value,
-      valuemsg: value.msg.replace(
+      valuemsg: value?.msg.replace(
         '_____',
         `<b>${currentBid + incrementer}</b>`
       ),

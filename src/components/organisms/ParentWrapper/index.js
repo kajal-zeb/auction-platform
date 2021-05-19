@@ -3,7 +3,6 @@ import { Layout, Typography } from 'antd';
 import { Header, Foot } from '../../atoms';
 import { Art, Bid, LiveChat } from '../../molecules';
 import classes from './ParentWrapper.module.scss';
-import Login from '../Login';
 import axios from 'axios';
 import { API_ENDPOINTS } from '../../../api';
 import { useHistory } from 'react-router-dom';
@@ -42,7 +41,7 @@ const ParentWrapper = (props) => {
       axios
         .post(`${ENV_CONFIG.BASE_URL}${API_ENDPOINTS.VERIFY_USER}`, {
           userId: userData.id,
-          passsphrase: userData.passphrase,
+          passphrase: userData.passphrase,
         })
         .then(({ data }) => {
           if (data && data.data) {
