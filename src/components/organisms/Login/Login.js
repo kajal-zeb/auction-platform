@@ -36,7 +36,6 @@ const Login = () => {
 			<div className={`${classes.inputArea}`}>
 				<Form
 					initialValues={{
-						username: '',
 						code: '',
 						remember: true,
 					}}
@@ -44,13 +43,6 @@ const Login = () => {
 					form={form}
 					onFinish={onFinish}
 				>
-					<Form.Item name={'username'}>
-						<Input
-							size={'large'}
-							className={`${classes.inputField}`}
-							placeHolder={'ENTER CRYPTO NAME'}
-						/>
-					</Form.Item>
 					<Form.Item name={'code'}>
 						<Input
 							size={'large'}
