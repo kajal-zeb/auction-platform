@@ -10,7 +10,7 @@ const { Content } = Layout;
 const { Footer } = Layout;
 
 const ParentWrapper = (props) => {
-	const isLoggedIn = false;
+	const [isLoggedIn, setIsLoggedIn] = useState(false);
 	const [showBidBlock, setShowBidBlock] = useState(false);
 	const [userExternalId, setuserExternalId] = useState('');
 	const [user, setUser] = useState({});
@@ -29,13 +29,14 @@ const ParentWrapper = (props) => {
 				.then(({ data }) => {
 					if (data && data.data) {
 						setUser(data.data);
+            setIsLoggedIn(true)
 						localStorage.setItem('USER', JSON.stringify(data.data));
 					}
 				});
 		} else {
 			axios
 				.get(
-					`${API_ENDPOINTS.BASE_URL}API_ENDPOINTS.INITIALIZE_USER/${userExternalId}`,
+					`${API_ENDPOINTS.BASE_URL}${API_ENDPOINTS.INITIALIZE_USER}/${userExternalId}`,
 				)
 				.then(({ data }) => {
 					if (data && data.data) {

@@ -7,13 +7,14 @@ import axios from 'axios';
 import { API_ENDPOINTS } from '../../../api';
 const Login = () => {
 	const [form] = Form.useForm();
-	const [userData, setUserData] = useState({});
 	const onFinish = async (data) => {
 		await axios
-			.post(`${API_ENDPOINTS.BASE_URL}${API_ENDPOINTS.VERIFY_CODE}`, { data })
+			.post(`${API_ENDPOINTS.BASE_URL}${API_ENDPOINTS.VERIFY_CODE}`, {
+				attendeId: localStorage.getItem('userexternalid'),
+				code: data.code,
+			})
 			.then(({ data }) => {
 				if (data && data.data) {
-					setUserData(data.data);
 					localStorage.setItem(
 						'USER',
 						JSON.stringify({
