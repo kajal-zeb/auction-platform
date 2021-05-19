@@ -114,32 +114,32 @@ const Bid = (props) => {
     {
       width: 220,
       key: 11,
-      msg: `Mujhe nai khelna ye. Mai apna BAT le ke jaara hun`,
+      msg: `Mujhe nai khelna ye. Mai apna BAT le ke jaara hun. _____`,
     },
     {
       width: 220,
       key: 12,
-      msg: `Mujhe nai khelna ye. Mai apna BAT le ke jaara hun`,
+      msg: `Mujhe nai khelna ye. Mai apna BAT le ke jaara hun. _____`,
     },
     {
       width: 250,
       key: 13,
-      msg: `Mujhe nai khelna ye. Mai apna BAT le ke jaara hun`,
+      msg: `Mujhe nai khelna ye. Mai apna BAT le ke jaara hun. _____`,
     },
     {
       width: 250,
       key: 14,
-      msg: `Mujhe nai khelna ye. Mai apna BAT le ke jaara hun`,
+      msg: `Mujhe nai khelna ye. Mai apna BAT le ke jaara hun. _____`,
     },
     {
       width: 250,
       key: 15,
-      msg: `Mujhe nai khelna ye. Mai apna BAT le ke jaara hun`,
+      msg: `Mujhe nai khelna ye. Mai apna BAT le ke jaara hun. _____`,
     },
     {
       width: 250,
       key: 16,
-      msg: `Mujhe nai khelna ye. Mai apna BAT le ke jaara hun`,
+      msg: `Mujhe nai khelna ye. Mai apna BAT le ke jaara hun. _____`,
     },
   ];
 
@@ -155,7 +155,7 @@ const Bid = (props) => {
     console.log({
       valuemsg: value.msg.replace('____', `<b>${updatedValue}</b>`),
     });
-    console.log(currentBid + incrementer);
+    setnewBid(currentBid + incrementer);
   };
   useEffect(() => {
     if (incrementer && currentMessage != null)
@@ -174,11 +174,7 @@ const Bid = (props) => {
         <div className={classes.success}>
           <span>
             <Sprite
-              id={
-                bidPlacedMessage === 'Success'
-                  ? 'tick'
-                  : 'cancel'
-              }
+              id={bidPlacedMessage === 'Success' ? 'tick' : 'cancel'}
               width={40}
               height={40}
             />
@@ -219,7 +215,7 @@ const Bid = (props) => {
             </div>
           </div>
           <Text align={'center'} size={'md'} spacing={'sm'}>
-            ~₹500
+            ~₹{(newBid * 0.04052356).toFixed(2)}
           </Text>
         </div>
         <div className={'pad-all-10 flex'}>
@@ -257,7 +253,13 @@ const Bid = (props) => {
               <Text size={'lg'} spacing={'md'} weight={600} id='message'>
                 Choose a message
               </Text>
-              <Text size={'md'} spacing={'md'} weight={600} noMargin id='message'>
+              <Text
+                size={'md'}
+                spacing={'md'}
+                weight={600}
+                noMargin
+                id='message'
+              >
                 <span style={{ color: 'var(--primary-color)' }}>
                   Choose a message to place bid!
                 </span>
