@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import { API_ENDPOINTS } from '../api';
 const io = require('socket.io-client');
-const ENDPOINT = 'http://localhost:3003';
+const ENDPOINT = API_ENDPOINTS.BASE_URL
 const SocketTest = () => {
 	const [response, setResponse] = useState({});
 
