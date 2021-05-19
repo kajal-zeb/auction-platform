@@ -19,19 +19,36 @@ const ParentWrapper = (props) => {
 		console.log(showBidBlock);
 	};
 	useEffect(() => {
-		axios
-			.get(`${API_ENDPOINTS.BASE_URL}API_ENDPOINTS.INITIALIZE_USER/${userExternalId}`)
-			.then(({ data }) => {
-				if (data && data.data) {
-					setUser(data.data);
-					localStorage.setItem(
-						'USER',
-						JSON.stringify({
-							username: data.data.username,
-						}),
-					);
-				}
-			});
+		let userData = localStorage.getItem('USER');
+		if (userData && userData.userId && userData.passphrase) {
+			axios
+				.post(`${API_ENDPOINTS.BASE_URL}${API_ENDPOINTS.VERIFY_USER}`, {
+					userId: userData.userId,
+					passsphrase: userData.passphrase,
+				})
+				.then(({ data }) => {
+					if (data && data.data) {
+						setUser(data.data);
+						localStorage.setItem('USER', JSON.stringify(data.data));
+					}
+				});
+		} else {
+			axios
+				.get(
+					`${API_ENDPOINTS.BASE_URL}API_ENDPOINTS.INITIALIZE_USER/${userExternalId}`,
+				)
+				.then(({ data }) => {
+					if (data && data.data) {
+						setUser(data.data);
+						localStorage.setItem(
+							'USER',
+							JSON.stringify({
+								username: data.data.username,
+							}),
+						);
+					}
+				});
+		}
 	}, []);
 	return (
 		<>
