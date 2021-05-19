@@ -7,6 +7,7 @@ import Login from '../Login';
 import axios from 'axios';
 import { API_ENDPOINTS } from '../../../api';
 import { useHistory } from 'react-router-dom';
+import { ENV_CONFIG } from '../../../config';
 const { Content } = Layout;
 const { Footer } = Layout;
 const { Text } = Typography;
@@ -33,7 +34,7 @@ const ParentWrapper = (props) => {
 			userData.passphrase
 		) {
 			axios
-				.post(`${API_ENDPOINTS.BASE_URL}${API_ENDPOINTS.VERIFY_USER}`, {
+				.post(`${ENV_CONFIG.BASE_URL}${API_ENDPOINTS.VERIFY_USER}`, {
 					userId: userData.userId,
 					passsphrase: userData.passphrase,
 				})
@@ -46,7 +47,7 @@ const ParentWrapper = (props) => {
 		} else {
 			axios
 				.get(
-					`${API_ENDPOINTS.BASE_URL}${
+					`${ENV_CONFIG.BASE_URL}${
 						API_ENDPOINTS.INITIALIZE_USER
 					}?userexternalid=${localStorage.getItem('attendeeId')}`,
 				)
