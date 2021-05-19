@@ -19,6 +19,7 @@ const { Footer } = Layout;
 
 const ParentWrapper = (props) => {
   const history = useHistory();
+  const [errorMsg, showErrorMsg] = useState(false);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [showBidBlock, setShowBidBlock] = useState(false);
   const onSelectionChange = (value) => {
@@ -62,11 +63,19 @@ const ParentWrapper = (props) => {
               setIsLoggedIn(true);
             } else history.push('/login');
             localStorage.setItem('USER', JSON.stringify(data.data));
+            showErrorMsg(false);
           }
+          showErrorMsg(false);
         })
-        .catch((e) => alert('Something went wrong!'));
+        .catch((e) => {
+          notify('Uh Oh! Something went wrong.');
+          showErrorMsg(true);
+        });
     }
   }, []);
+
+  const notify = (message) => toast.warning(message);
+
   return (
     <>
       {!isLoggedIn ? (
@@ -82,7 +91,9 @@ const ParentWrapper = (props) => {
         >
           <Logo width={150} height={'auto'} />
           <Text noMargin size={'md'} spacing={'md'} primaryColor>
-            Hold tight while we setup the platform....
+            {!errorMsg
+              ? 'Hold tight while we setup the platform....'
+              : 'Something went wrong. Try refreshing!'}
           </Text>
         </div>
       ) : (
