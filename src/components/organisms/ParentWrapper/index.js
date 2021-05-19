@@ -3,7 +3,7 @@ import { Layout } from 'antd';
 import { Header, Foot } from '../../atoms';
 import { Art, Bid, LiveChat } from '../../molecules';
 import classes from './ParentWrapper.module.scss';
-import Login from '../Login/Login';
+import Login from '../Login';
 import axios from 'axios';
 import { API_ENDPOINTS } from '../../../api';
 const { Content } = Layout;
@@ -53,7 +53,7 @@ const ParentWrapper = (props) => {
 	}, []);
 	return (
 		<>
-			{!isLoggedIn ? (
+			{isLoggedIn ? (
 				<Layout style={{ height: '100vh' }} id='auction'>
 					<Header />
 					<Content style={{ height: 'calc(100% - 209px)' }}>
