@@ -1,42 +1,38 @@
-import { Input, Form, Button } from 'antd';
+import { Input, Form, Button, Typography } from 'antd';
 import React, { useEffect, useState } from 'react';
 import Logo from '../../atoms/Logo/Logo';
 import Sprite from '../../atoms/Sprite/Sprite';
 import classes from './Login.module.scss';
 import axios from 'axios';
 import { API_ENDPOINTS } from '../../../api';
-import { toast } from 'react-toastify';
-
+import { useHistory } from 'react-router-dom';
+const { Text } = Typography;
 
 const Login = () => {
 	const [form] = Form.useForm();
-	const patchExternalID = () => {
-		// let data = window.location.href // extract the id from here
-		localStorage.setItem('userexternalid',1) // temp until we get it from url
-	}
+	const history = useHistory();
 
+	// const patchExternalID = () => {
+	// 	// let data = window.location.href // extract the id from here
+	// 	localStorage.setItem('userexternalid',1) // temp until we get it from url
+	// }
 
 	const onFinish = async (data) => {
-		if(!localStorage.getItem('userexternalid')) {
-			patchExternalID()
-		}
+		// if(!localStorage.getItem('userexternalid')) {
+		// 	patchExternalID()
+		// }
 		let body = {
-			attendeeId: localStorage.getItem('userexternalid'),
+			attendeeId: localStorage.getItem('attendeeId'),
 			code: data.code,
-		}
+		};
 		await axios
 			.post(`${API_ENDPOINTS.BASE_URL}${API_ENDPOINTS.VERIFY_CODE}`, body)
 			.then(({ data }) => {
 				if (data && data.data && Object.keys(data.data).length !== 0) {
-					localStorage.setItem(
-						'USER',
-						JSON.stringify(data.data),
-					);
+					localStorage.setItem('USER', JSON.stringify(data.data));
+					history.push('/');
 				} else {
-					// toast.success("Success Notification !", {  // it wasn't working lol
-					// 	position: toast.POSITION.TOP_CENTER
-					//   });
-					alert('Failed to verify code. ')
+					alert('Failed to verify code. ');
 				}
 			})
 			.catch((err) => {
@@ -44,16 +40,14 @@ const Login = () => {
 			});
 	};
 
-	useEffect(() => {
-		if(localStorage.getItem('USER') && localStorage.getItem('userexternalid')) {
-			// redirect to parent wrapper 
-		}
-	}, []);
-
 	return (
 		<div className={`${classes.loginView}`}>
 			<Logo width={150} height={'auto'} />
 			<div className={`${classes.inputArea}`}>
+				<Text>
+					A verification code has been sent to your email. Please enter the code
+					below to continue...
+				</Text>
 				<Form
 					initialValues={{
 						code: '',
