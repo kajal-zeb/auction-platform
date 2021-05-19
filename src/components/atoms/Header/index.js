@@ -7,6 +7,15 @@ import Avatar from '../Avatar/index';
 import Logo from '../Logo/Logo';
 
 const Header = (props) => {
+
+  const [highestBid, setHighestBid] = useState(null);
+
+  useEffect(() => {
+    if (parseFloat(JSON.parse(localStorage.getItem('currentbid'))['currentHighestBid'])) {
+      setHighestBid(parseFloat(JSON.parse(localStorage.getItem('currentbid'))['currentHighestBid']))
+    }
+  }, [localStorage.getItem('currentbid')]);
+
   return (
     <div>
       <div className={`pad-all-10`}>
@@ -17,18 +26,20 @@ const Header = (props) => {
           </Text> */}
         </div>
       </div>
-        <div className={`text-align-center`}>
-          <Text noMargin size={'md'} spacing={'md'}>
-            Highest Bid
-          </Text>
-        </div>
+      <div className={`text-align-center`}>
+        <Text noMargin size={'md'} spacing={'md'}>
+          Highest Bid
+        </Text>
+      </div>
       <div className={`${parentClasses.footerStyle} ${classes.subHeaderStyle}`}>
         <Title tag={'h2'} spacing={'none'} weight={600}>
-          49,59,890 S
+          {highestBid} S
         </Title>
         <div className={`flex`}>
-          <Avatar name={'Jatin Kukreja'}/>
-          <Text noMargin size={'md'} spacing={'md'} weight={600}><span style={{ color: 'var(--white)' }}>Jatin Kukreja</span></Text>
+          <Avatar name={'Jatin Kukreja'} />
+          <Text noMargin size={'md'} spacing={'md'} weight={600}>
+            <span style={{ color: 'var(--white)' }}>Jatin Kukreja</span>
+          </Text>
         </div>
       </div>
     </div>

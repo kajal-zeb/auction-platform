@@ -51,45 +51,46 @@ const LiveChat = (props) => {
   ];
 
   return (
-      <div className={`${classes.comments}`}>
-        {comments.map((comment, index) => {
-          return (
-            <Row
-              key={index}
-              gutter={11}
-              className={`${classes.chatItem} ${
-                index === 4 ? classes.selected : undefined
-              }`}
-            >
-              <Col className='gutter-row' flex={'52px'} >
-                <Avatar name={comment.name} width={40} height={40}/>
-              </Col>
-              <Col className='gutter-row' flex={'auto'}>
-                <Text size={'md'} noMargin weight={600}>
-                  {comment.name}
-                </Text>
-                <Text
-                  size={'md'}
-                  noMargin
-                  theme={index !== 4 ? 'gray' : undefined}
-                >
-                  {comment.comment}
-                </Text>
-              </Col>
-              <Col className='gutter-row' flex={'68px'}>
-                <Text
-                  size={'sm'}
-                  noMargin
-                  align={'right'}
-                  theme={index !== 4 ? 'gray' : undefined}
-                >
-                  {comment.time}
-                </Text>
-              </Col>
-            </Row>
-          );
-        })}
-      </div>
+    <div className={`${classes.comments}`}>
+      {comments.map((comment, index) => {
+        return (
+          <Row
+            key={index}
+            gutter={11}
+            className={`${classes.chatItem} ${
+              index === 4 ? classes.selected : undefined
+            }`}
+          >
+            <Col className='gutter-row' flex={'52px'}>
+              <Avatar name={comment.name} width={40} height={40} />
+            </Col>
+            <Col className='gutter-row' flex={'auto'}>
+              <Text size={'md'} noMargin weight={600}>
+                {comment.name}
+              </Text>
+              <Text
+                size={'md'}
+                noMargin
+                theme={index !== 4 ? 'gray' : undefined}
+              >
+                {comment.comment}
+              </Text>
+            </Col>
+            <Col className='gutter-row' flex={'68px'}>
+              <Text
+                size={'sm'}
+                noMargin
+                align={'right'}
+                theme={index !== 4 ? 'gray' : undefined}
+              >
+                {/* if time is available, use moment from now */}
+                {comment.time}
+              </Text>
+            </Col>
+          </Row>
+        );
+      })}
+    </div>
   );
 };
 export default LiveChat;
