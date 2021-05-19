@@ -4,6 +4,7 @@ import { API_ENDPOINTS } from '../api';
 import { ENV_CONFIG } from '../config';
 const io = require('socket.io-client');
 const SocketTest = () => {
+	console.log('ENV', ENV_CONFIG)
 	const [response, setResponse] = useState({});
 
 	useEffect(() => {

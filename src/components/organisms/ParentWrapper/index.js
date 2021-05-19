@@ -26,16 +26,16 @@ const ParentWrapper = (props) => {
 			let userexternalid = '119287966';
 			localStorage.setItem('attendeeId', userexternalid);
 		}
-		let userData = localStorage.getItem('USER');
+		let userData = JSON.parse(localStorage.getItem('USER'));
 		if (
 			userData &&
 			Object.keys(userData).length &&
-			userData.userId &&
+			userData.id &&
 			userData.passphrase
 		) {
 			axios
 				.post(`${ENV_CONFIG.BASE_URL}${API_ENDPOINTS.VERIFY_USER}`, {
-					userId: userData.userId,
+					userId: userData.id,
 					passsphrase: userData.passphrase,
 				})
 				.then(({ data }) => {
@@ -56,8 +56,8 @@ const ParentWrapper = (props) => {
 						if (data.data.isActive) {
 							setIsLoggedIn(true);
 						} else history.push('/login');
+						localStorage.setItem('USER', JSON.stringify(data.data));
 					}
-					localStorage.setItem('USER', JSON.stringify(data.data));
 				})
 				.catch((e) => alert('Something went wrong!'));
 		}
