@@ -175,7 +175,7 @@ const Bid = (props) => {
           <span>
             <Sprite
               id={
-                bidPlacedMessage && bidPlacedMessage.toLoweCase() === 'success'
+                bidPlacedMessage === 'Success'
                   ? 'tick'
                   : 'cancel'
               }
