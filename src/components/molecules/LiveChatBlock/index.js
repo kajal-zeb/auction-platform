@@ -3,7 +3,7 @@ import { Col, Row } from 'antd';
 import Text from '../../atoms/Text/Text';
 import { Avatar } from '../../atoms/index';
 import classes from './LiveChatBlock.module.scss';
-import { ENV_CONFIG } from '../../../config';
+import ENV_CONFIG from '../../../config';
 import moment from 'moment';
 
 const io = require('socket.io-client');
@@ -19,7 +19,7 @@ const LiveChat = (props) => {
 				time: data.bidTime,
 				bidAmount: data.currentHighestBid,
 			};
-			setChats(prev => [...prev, formattedData]);
+			setChats((prev) => [...prev, formattedData]);
 		});
 	}, []);
 	return (

@@ -6,7 +6,7 @@ import classes from './Login.module.scss';
 import axios from 'axios';
 import { API_ENDPOINTS } from '../../../api';
 import { useHistory } from 'react-router-dom';
-import { ENV_CONFIG } from '../../../config';
+import ENV_CONFIG from '../../../config';
 const { Text } = Typography;
 
 const Login = () => {

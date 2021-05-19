@@ -1,8 +1,8 @@
+import ENV_CONFIG from './src/config'
 const express = require('express');
 const path = require('path');
 const app = express();
 const compression = require('compression');
-const { ENV_CONFIG } = require('./src/config');
 
 require('dotenv').config();
 

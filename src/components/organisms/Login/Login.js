@@ -5,7 +5,7 @@ import Sprite from '../../atoms/Sprite/Sprite';
 import classes from './Login.module.scss';
 import axios from 'axios';
 import { API_ENDPOINTS } from '../../../api';
-import { ENV_CONFIG } from '../../../config';
+import ENV_CONFIG from '../../../config';
 const Login = () => {
 	const [form] = Form.useForm();
 	const onFinish = async (data) => {
