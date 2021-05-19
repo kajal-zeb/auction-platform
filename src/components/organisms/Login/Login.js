@@ -1,12 +1,32 @@
 import { Input, Form, Button } from 'antd';
-import React from 'react';
+import React, { useState } from 'react';
 import Logo from '../../atoms/Logo/Logo';
 import Sprite from '../../atoms/Sprite/Sprite';
 import classes from './Login.module.scss';
-
+import axios from 'axios';
+import { API_ENDPOINTS } from '../../../api';
 const Login = () => {
 	const [form] = Form.useForm();
-	const onFinish = (data) => {
+	const [userData, setUserData] = useState({});
+	const onFinish = async (data) => {
+		await axios
+			.post(`${API_ENDPOINTS.BASE_URL}${API_ENDPOINTS.VERIFY_CODE}`, { data })
+			.then(({ data }) => {
+				if (data && data.data) {
+					setUserData(data.data);
+					localStorage.setItem(
+						'USER',
+						JSON.stringify({
+							userId: data.data?.id,
+							passphrase: data.data.passphrase,
+							username: data.data.username,
+						}),
+					);
+				}
+			})
+			.catch((err) => {
+				console.log('Verify code Err : ', err);
+			});
 		console.log(data);
 	};
 
@@ -16,7 +36,7 @@ const Login = () => {
 			<div className={`${classes.inputArea}`}>
 				<Form
 					initialValues={{
-            username: '',
+						username: '',
 						code: '',
 						remember: true,
 					}}
