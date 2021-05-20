@@ -29,6 +29,9 @@ const VIEW_CONFIG = {
 const EVENT_START_TIME = JSON.parse(localStorage.getItem('USER'))
   ? JSON.parse(localStorage.getItem('USER'))?.eventStartTime
   : '';
+const EVENT_END_TIME = JSON.parse(localStorage.getItem('USER'))
+  ? JSON.parse(localStorage.getItem('USER'))?.eventEndTime
+  : '';
 // const EVENT_START_TIME = "2021-05-20T08:41:10.590Z"
 const ParentWrapper = (props) => {
   const [errorMsg, showErrorMsg] = useState(false);
@@ -121,7 +124,7 @@ const ParentWrapper = (props) => {
   }, [initializeUser]);
 
   useEffect(() => {
-    if (EVENT_START_TIME) {
+    if (EVENT_START_TIME && EVENT_END_TIME) {
       console.log(
         getDateFormat(new Date(), true),
         getDateFormat(EVENT_START_TIME, true)
@@ -133,13 +136,18 @@ const ParentWrapper = (props) => {
         ) {
           setViewConfig(VIEW_CONFIG.bid);
           clearInterval(interval);
+        } else if (
+          getDateFormat(new Date(), true) <= getDateFormat(EVENT_END_TIME, true)
+        ) {
+          setViewConfig(VIEW_CONFIG.winner);
+          clearInterval(interval);
         } else setViewConfig(VIEW_CONFIG.wait);
         return () => {
           clearInterval(interval);
         };
       }, 1000);
     }
-  }, [EVENT_START_TIME]);
+  }, [EVENT_START_TIME, EVENT_END_TIME]);
 
   const getDateFormat = (date, time = false) => {
     const inputDate = new Date(date);
