@@ -5,7 +5,7 @@ import { Avatar } from '../../atoms/index';
 import classes from './LiveChatBlock.module.scss';
 import ENV_CONFIG from '../../../config';
 import moment from 'moment';
-
+const user = JSON.parse(localStorage.getItem('USER')) || {};
 const io = require('socket.io-client');
 const LiveChat = (props) => {
 	const [chats, setChats] = useState([]);
@@ -36,7 +36,7 @@ const LiveChat = (props) => {
 							key={index}
 							gutter={11}
 							className={`${classes.chatItem} ${
-								index === 4 ? classes.selected : undefined
+								comment.name === user?.username ? classes.selected : undefined
 							}`}
 						>
 							<Col className='gutter-row' flex={'52px'}>
@@ -49,7 +49,7 @@ const LiveChat = (props) => {
 								<Text
 									size={'md'}
 									noMargin
-									theme={index !== 4 ? 'gray' : undefined}
+									theme={comment.name !== user?.username ? 'gray' : undefined}
 								>
 									{comment.comment}
 								</Text>
@@ -59,7 +59,7 @@ const LiveChat = (props) => {
 									size={'sm'}
 									noMargin
 									align={'right'}
-									theme={index !== 4 ? 'gray' : undefined}
+									theme={comment.name !== user?.username ? 'gray' : undefined}
 								>
 									{/* if time is available, use moment from now */}
 									{moment(comment.time).fromNow()}
