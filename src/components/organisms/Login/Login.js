@@ -5,8 +5,9 @@ import Sprite from '../../atoms/Sprite/Sprite';
 import classes from './Login.module.scss';
 import axios from 'axios';
 import { API_ENDPOINTS } from '../../../api';
+import { useHistory, withRouter } from 'react-router-dom';
 import ENV_CONFIG from '../../../config';
-const Login = () => {
+const Login = (props) => {
 	const [form] = Form.useForm();
 	const onFinish = async (data) => {
 		await axios
@@ -24,6 +25,7 @@ const Login = () => {
 							username: data.data.username,
 						}),
 					);
+					props.onFinish()
 				}
 			})
 			.catch((err) => {
