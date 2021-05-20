@@ -28,14 +28,15 @@ const EVENT_START_TIME = JSON.parse(localStorage.getItem('USER'))
 // const EVENT_START_TIME = "2021-05-20T08:41:10.590Z"
 const ParentWrapper = (props) => {
 	const [errorMsg, showErrorMsg] = useState(false);
-	const [viewConfig, setViewConfig] = useState(VIEW_CONFIG.bid);
+	const [viewConfig, setViewConfig] = useState(VIEW_CONFIG.hold);
 	const [showBidBlock, setShowBidBlock] = useState(false);
 	const onSelectionChange = (value) => {
 		setShowBidBlock(value);
 		console.log(showBidBlock);
 	};
 	useEffect(() => {
-		if (!localStorage.getItem('attendeeId')) {
+		console.log(localStorage.getItem('attendeeId'));
+		if (!JSON.parse(localStorage.getItem('attendeeId'))) {
 			// let userexternalid = window.location.href //will update once patched to Aventri
 			let userexternalid = new URLSearchParams(window.location.search).get(
 				'userexternalid',
@@ -164,9 +165,11 @@ const ParentWrapper = (props) => {
 			}}
 		>
 			<Logo width={150} height={'auto'} />
-			<Text noMargin size={'md'} spacing={'md'} primaryColor>
-				{message}
-			</Text>
+			<div style={{marginTop:'20px'}}>
+				<Text noMargin size={'md'} spacing={'md'} primaryColor>
+					{message}
+				</Text>
+			</div>
 		</div>
 	);
 	const handleBid = () => {
