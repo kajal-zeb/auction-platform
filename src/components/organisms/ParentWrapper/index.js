@@ -28,7 +28,7 @@ const EVENT_START_TIME = JSON.parse(localStorage.getItem('USER'))
 // const EVENT_START_TIME = "2021-05-20T08:13:40.411Z"
 const ParentWrapper = (props) => {
 	const [errorMsg, showErrorMsg] = useState(false);
-	const [viewConfig, setViewConfig] = useState(VIEW_CONFIG.hold);
+	const [viewConfig, setViewConfig] = useState(VIEW_CONFIG.bid);
 	const [showBidBlock, setShowBidBlock] = useState(false);
 	const onSelectionChange = (value) => {
 		setShowBidBlock(value);
