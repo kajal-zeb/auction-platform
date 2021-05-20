@@ -188,6 +188,12 @@ const Bid = (props) => {
 		}
 	};
 
+	useEffect(() => {
+		if (bidPlacedMessage === 'Success') {
+			props.onClose();
+		}
+	}, [bidPlacedMessage])
+
 	return (
 		<div className={`${classes.bidBlockContainer}`}>
 			{isBidPlaced ? (
