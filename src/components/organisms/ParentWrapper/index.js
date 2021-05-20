@@ -25,7 +25,7 @@ const VIEW_CONFIG = {
 const EVENT_START_TIME = JSON.parse(localStorage.getItem('USER'))
 	? JSON.parse(localStorage.getItem('USER'))?.eventStartTime
 	: '';
-// const EVENT_START_TIME = "2021-05-20T08:13:40.411Z"
+// const EVENT_START_TIME = "2021-05-20T08:41:10.590Z"
 const ParentWrapper = (props) => {
 	const [errorMsg, showErrorMsg] = useState(false);
 	const [viewConfig, setViewConfig] = useState(VIEW_CONFIG.hold);
@@ -58,7 +58,7 @@ const ParentWrapper = (props) => {
 				.then(({ data }) => {
 					if (data && data.data) {
 						if (
-							getDateFormat(new Date(), true) ===
+							getDateFormat(new Date(), true) >=
 							getDateFormat(EVENT_START_TIME, true)
 						) {
 							setViewConfig(VIEW_CONFIG.bid);
@@ -81,7 +81,7 @@ const ParentWrapper = (props) => {
 						if (data.data.isActive) {
 							console.log('Active');
 							if (
-								getDateFormat(new Date(), true) ===
+								getDateFormat(new Date(), true) >=
 								getDateFormat(EVENT_START_TIME, true)
 							) {
 								setViewConfig(VIEW_CONFIG.bid);
@@ -112,7 +112,7 @@ const ParentWrapper = (props) => {
 			);
 			const interval = setInterval(() => {
 				if (
-					getDateFormat(new Date(), true) ===
+					getDateFormat(new Date(), true) >=
 					getDateFormat(EVENT_START_TIME, true)
 				) {
 					setViewConfig(VIEW_CONFIG.bid);
@@ -171,7 +171,7 @@ const ParentWrapper = (props) => {
 	);
 	const handleBid = () => {
 		if (
-			getDateFormat(new Date(), true) === getDateFormat(EVENT_START_TIME, true)
+			getDateFormat(new Date(), true) >= getDateFormat(EVENT_START_TIME, true)
 		) {
 			setViewConfig(VIEW_CONFIG.bid);
 			// clearInterval(interval);
