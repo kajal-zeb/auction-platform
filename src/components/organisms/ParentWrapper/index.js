@@ -38,6 +38,7 @@ const ParentWrapper = (props) => {
   const [viewConfig, setViewConfig] = useState(VIEW_CONFIG.hold);
   const [showBidBlock, setShowBidBlock] = useState(false);
   const [initializeUser, setInitializeUser] = useState(false);
+  const [winnerMessage, showWinnerMessage] = useState(true);
   const onSelectionChange = (value) => {
     setShowBidBlock(value);
     console.log(showBidBlock);
@@ -139,6 +140,12 @@ const ParentWrapper = (props) => {
         } else if (
           getDateFormat(new Date(), true) <= getDateFormat(EVENT_END_TIME, true)
         ) {
+          if (
+            JSON.parse(localStorage.getItem('currentbid'))?.highestBidderId ===
+            JSON.parse(localStorage.getItem('attendeeId'))
+          ) {
+            showWinnerMessage(true);
+          }
           setViewConfig(VIEW_CONFIG.winner);
           clearInterval(interval);
         } else setViewConfig(VIEW_CONFIG.wait);
@@ -194,7 +201,7 @@ const ParentWrapper = (props) => {
       >
         <Logo width={150} height={'auto'} />
       </div>
-      {trophy && <Trophy width={150} height={'auto'} />}
+      {trophy && showWinnerMessage && <Trophy width={150} height={'auto'} />}
       <div style={{ marginTop: '20px' }}>
         <Text noMargin size={'md'} spacing={'md'} primaryColor>
           <span dangerouslySetInnerHTML={{ __html: message }} />
@@ -252,7 +259,9 @@ const ParentWrapper = (props) => {
       return <Reference onFinish={handleReference} />;
     case VIEW_CONFIG.winner:
       return getHoldView(
-        'Winner Winner Chicken Dinner!<br/>Congratulations on winning the auction.',
+        winnerMessage
+          ? 'Winner Winner Chicken Dinner!<br/>Congratulations on winning the auction.'
+          : 'The auction has ended.',
         true
       );
     default:
