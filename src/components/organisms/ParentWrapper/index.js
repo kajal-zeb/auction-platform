@@ -96,8 +96,8 @@ const ParentWrapper = (props) => {
           )
           .then(({ data }) => {
             if (data && data.data && Object.keys(data.data).length) {
-              console.log('Data > ', data);
-              localStorage.setItem('USER', JSON.stringify(data.data));
+              console.log('Data > ', data.data);
+              localStorage.setItem('Initialise', JSON.stringify(data.data));
               if (data.data.isActive) {
                 console.log('Active');
                 if (
