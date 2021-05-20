@@ -24,13 +24,14 @@ const Bid = (props) => {
 			return;
 		}
 		setLoading(true);
+        const user = JSON.parse(localStorage.getItem('USER')) || {};
 		await axios
 			.post(
 				`${ENV_CONFIG.BASE_URL}${API_ENDPOINTS.PLACE_BID}`,
 				/* set user name, user id here */
 				{
-					userId: 1,
-					username: 'Kajal',
+					userId: user.id,
+					username: user.username,
 					message: currentMessage.valuemsg
 						.replace('<b>', '')
 						.replace('</b>', ''),
