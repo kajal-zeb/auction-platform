@@ -46,9 +46,9 @@ const Login = (props) => {
     <div className={`${classes.loginView}`}>
       <Logo width={150} height={'auto'} />
       <div className={`${classes.inputArea}`}>
-        <Text noMargin size={'md'} spacing={'md'} primaryColor>
-          The event has not started yet!
-        </Text>
+        {JSON.parse(localStorage.getItem('Initialise'))['email'] && <Text noMargin size={'md'} spacing={'md'} primaryColor>
+          {`Enter the code sent on ${JSON.parse(localStorage.getItem('Initialise'))['email']}`}
+        </Text>}
         <Form
           initialValues={{
             code: '',
