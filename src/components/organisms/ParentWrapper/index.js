@@ -35,7 +35,8 @@ const ParentWrapper = (props) => {
 		console.log(showBidBlock);
 	};
 	useEffect(() => {
-		if (!localStorage.getItem('attendeeId')) {
+		console.log(localStorage.getItem('attendeeId'));
+		if (!JSON.parse(localStorage.getItem('attendeeId'))) {
 			// let userexternalid = window.location.href //will update once patched to Aventri
 			let userexternalid = new URLSearchParams(window.location.search).get(
 				'userexternalid',
@@ -164,9 +165,11 @@ const ParentWrapper = (props) => {
 			}}
 		>
 			<Logo width={150} height={'auto'} />
-			<Text noMargin size={'md'} spacing={'md'} primaryColor>
-				{message}
-			</Text>
+			<div style={{marginTop:'20px'}}>
+				<Text noMargin size={'md'} spacing={'md'} primaryColor>
+					{message}
+				</Text>
+			</div>
 		</div>
 	);
 	const handleBid = () => {
