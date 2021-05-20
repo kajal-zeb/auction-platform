@@ -5,12 +5,12 @@ import Sprite from '../../atoms/Sprite/Sprite';
 import classes from './Login.module.scss';
 import axios from 'axios';
 import { API_ENDPOINTS } from '../../../api';
-import ENV_CONFIG from '../../../config';
+// import ENV_CONFIG from '../../../config';
 const Login = () => {
 	const [form] = Form.useForm();
 	const onFinish = async (data) => {
 		await axios
-			.post(`${ENV_CONFIG.BASE_URL}${API_ENDPOINTS.VERIFY_CODE}`, {
+			.post(`${process.env.BASE_URL}${API_ENDPOINTS.VERIFY_CODE}`, {
 				attendeId: localStorage.getItem('userexternalid'),
 				code: data.code,
 			})

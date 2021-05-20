@@ -6,7 +6,7 @@ import classes from './Login.module.scss';
 import axios from 'axios';
 import { API_ENDPOINTS } from '../../../api';
 import { useHistory } from 'react-router-dom';
-import ENV_CONFIG from '../../../config';
+// import ENV_CONFIG from '../../../config';
 const { Text } = Typography;
 
 const Login = () => {
@@ -27,7 +27,7 @@ const Login = () => {
 			code: data.code,
 		};
 		await axios
-			.post(`${ENV_CONFIG.BASE_URL}${API_ENDPOINTS.VERIFY_CODE}`, body)
+			.post(`${process.env.BASE_URL}${API_ENDPOINTS.VERIFY_CODE}`, body)
 			.then(({ data }) => {
 				if (data && data.data && Object.keys(data.data).length !== 0) {
 					localStorage.setItem('USER', JSON.stringify(data.data));

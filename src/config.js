@@ -1,4 +1,4 @@
-const ENV_CONFIG = {
+const ENVIRONMENTS = {
 	development: {
 		PORT: 3001,
 		BASE_URL: 'http://localhost:3003',
@@ -12,5 +12,4 @@ const ENV_CONFIG = {
 		BASE_URL: 'http://65.2.79.23:3003',
 	},
 };
-export default ENV_CONFIG[process.env.REACT_APP_ENV] ||
-	ENV_CONFIG[Object.keys(ENV_CONFIG)[0]];
+export const ENV_CONFIG = ENVIRONMENTS[process.env.REACT_APP_ENV];

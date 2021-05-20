@@ -3,14 +3,14 @@ import { Col, Row } from 'antd';
 import Text from '../../atoms/Text/Text';
 import { Avatar } from '../../atoms/index';
 import classes from './LiveChatBlock.module.scss';
-import ENV_CONFIG from '../../../config';
+// import ENV_CONFIG from '../../../config';
 import moment from 'moment';
 
 const io = require('socket.io-client');
 const LiveChat = (props) => {
 	const [chats, setChats] = useState([]);
 	useEffect(() => {
-		const socket = io(ENV_CONFIG.BASE_URL);
+		const socket = io(process.env.BASE_URL);
 		socket.on('HighestBid', (data) => {
 			localStorage.setItem('currentbid', JSON.stringify(data));
 			let formattedData = {

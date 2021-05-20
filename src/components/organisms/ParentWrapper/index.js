@@ -6,7 +6,7 @@ import classes from './ParentWrapper.module.scss';
 import axios from 'axios';
 import { API_ENDPOINTS } from '../../../api';
 import { useHistory } from 'react-router-dom';
-import ENV_CONFIG from '../../../config';
+// import ENV_CONFIG from '../../../config';
 import Logo from '../../atoms/Logo/Logo';
 import Text from '../../atoms/Text/Text';
 import { toast } from 'react-toastify';
@@ -39,7 +39,7 @@ const ParentWrapper = (props) => {
 			userData.passphrase
 		) {
 			axios
-				.post(`${ENV_CONFIG.BASE_URL}${API_ENDPOINTS.VERIFY_USER}`, {
+				.post(`${process.env.BASE_URL}${API_ENDPOINTS.VERIFY_USER}`, {
 					userId: userData.id,
 					passphrase: userData.passphrase,
 				})
@@ -52,7 +52,7 @@ const ParentWrapper = (props) => {
 		} else {
 			axios
 				.get(
-					`${ENV_CONFIG.BASE_URL}${
+					`${process.env.BASE_URL}${
 						API_ENDPOINTS.INITIALIZE_USER
 					}?userexternalid=${localStorage.getItem('attendeeId')}`,
 				)

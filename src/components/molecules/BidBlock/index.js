@@ -7,7 +7,7 @@ import { LoadingOutlined } from '@ant-design/icons';
 import Sprite from '../../atoms/Sprite/Sprite';
 import axios from 'axios';
 import { API_ENDPOINTS } from '../../../api';
-import ENV_CONFIG from '../../../config';
+// import ENV_CONFIG from '../../../config';
 
 const Bid = (props) => {
 	const [bidOptions, setBidOptions] = useState([]);
@@ -26,7 +26,7 @@ const Bid = (props) => {
 		setLoading(true);
 		await axios
 			.post(
-				`${ENV_CONFIG.BASE_URL}${API_ENDPOINTS.PLACE_BID}`,
+				`${process.env.BASE_URL}${API_ENDPOINTS.PLACE_BID}`,
 				/* set user name, user id here */
 				{
 					userId: 1,
