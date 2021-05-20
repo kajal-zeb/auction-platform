@@ -167,10 +167,8 @@ const Bid = (props) => {
 
 	useEffect(() => {
 		determineCurrentBid();
-		if (JSON.parse(localStorage.getItem('currentbid'))['bidBracket']) {
-			setBidOptions(
-				JSON.parse(localStorage.getItem('currentbid'))['bidBracket'],
-			);
+		if (JSON.parse(localStorage.getItem('currentbid'))?.bidBracket) {
+			setBidOptions(JSON.parse(localStorage.getItem('currentbid'))?.bidBracket);
 		}
 	}, [localStorage.getItem('currentbid')]);
 
