@@ -33,7 +33,6 @@ body {
   margin-top: 10px;
 }
 
-
 .transition-hide {
   overflow: hidden;
   opacity: 0;
@@ -42,13 +41,19 @@ body {
   position: absolute;
   top: 0;
   width: 100%;
-  background: #161616;
+  background: var(--bg-color);
   height: calc(100% + 60px);
-  transform: translate(0,100%);
+  transform: translate(0, 100%);
   &.show {
     opacity: 1;
     z-index: 3;
     transition: all 0.3s ease-in-out;
-    transform: translate(0,0);
+    transform: translate(0, 0);
   }
+}
+
+.Toastify__toast--warning {
+  background: var(--primary-color) !important;
+  color: var(--bg-color);
+  font-size: 16px;
 }
