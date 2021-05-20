@@ -13,7 +13,7 @@ const Header = (props) => {
 		if (localStorage.getItem('currentbid')) {
 			setHighestBid(JSON.parse(localStorage.getItem('currentbid')));
 		}
-	}, [localStorage.getItem('currentbid')]);
+	}, [JSON.parse(localStorage.getItem('currentbid'))]);
 
 	return (
 		<div>
