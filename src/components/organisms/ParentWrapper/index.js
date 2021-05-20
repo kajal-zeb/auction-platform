@@ -20,6 +20,7 @@ const VIEW_CONFIG = {
   hold: 'hold',
   enterCode: 'enterCode',
   bid: 'bid',
+  wait: 'wait',
 };
 const ParentWrapper = (props) => {
   const [errorMsg, showErrorMsg] = useState(false);
@@ -86,6 +87,50 @@ const ParentWrapper = (props) => {
     }
   }, []);
 
+  useEffect(() => {
+    if (JSON.parse(localStorage.getItem('USER'))['eventStartTime']) {
+      const interval = setInterval(() => {
+        if (getDateFormat(new Date(), true) ===
+          getDateFormat(
+            JSON.parse(localStorage.getItem('USER'))['eventStartTime'],
+            true
+          )) {
+            setViewConfig(VIEW_CONFIG.wait);
+            clearInterval(interval);
+          }
+        return () => {
+          clearInterval(interval);
+        }
+      }, 1000);
+    }
+  }, [JSON.parse(localStorage.getItem('USER'))['eventStartTime']]);
+
+  const getDateFormat = (date, time = false) => {
+    const inputDate = new Date(date);
+    let month = String(inputDate?.getMonth() + 1);
+    let day = String(inputDate?.getDate());
+    const year = String(inputDate?.getFullYear());
+    let hours = '';
+    let minutes = '';
+    let seconds = '';
+
+    if (month.length < 2) month = '0' + month;
+    if (day.length < 2) day = '0' + day;
+
+    if (time) {
+      hours = String(inputDate?.getHours());
+      minutes = String(inputDate?.getMinutes());
+      seconds = String(inputDate?.getSeconds());
+      if (hours.length < 2) hours = '0' + hours;
+      if (minutes.length < 2) minutes = '0' + minutes;
+      if (seconds.length < 2) seconds = '0' + seconds;
+    }
+
+    return `${year}/${month}/${day}${
+      time ? ` ${hours}:${minutes}:${seconds}` : ``
+    }`;
+  };
+
   const notify = (message) => toast.warning(message);
   const getHoldView = (message) => (
     <div
@@ -135,6 +180,10 @@ const ParentWrapper = (props) => {
             PLACE BID
           </Footer>
         </Layout>
+      );
+    case VIEW_CONFIG.wait:
+      return getHoldView(
+        'You\'re in! Please Wait for the auction to begin...'
       );
     default:
       return getHoldView;
