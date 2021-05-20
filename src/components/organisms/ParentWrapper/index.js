@@ -12,6 +12,7 @@ import Text from '../../atoms/Text/Text';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import Login from '../Login';
+import Reference from '../Reference';
 toast.configure();
 
 const { Content } = Layout;
@@ -21,6 +22,7 @@ const VIEW_CONFIG = {
 	enterCode: 'enterCode',
 	bid: 'bid',
 	wait: 'wait',
+	reference: 'reference',
 };
 const EVENT_START_TIME = JSON.parse(localStorage.getItem('USER'))
 	? JSON.parse(localStorage.getItem('USER'))?.eventStartTime
@@ -30,57 +32,44 @@ const ParentWrapper = (props) => {
 	const [errorMsg, showErrorMsg] = useState(false);
 	const [viewConfig, setViewConfig] = useState(VIEW_CONFIG.hold);
 	const [showBidBlock, setShowBidBlock] = useState(false);
+	const [initializeUser, setInitializeUser] = useState(false);
 	const onSelectionChange = (value) => {
 		setShowBidBlock(value);
 		console.log(showBidBlock);
 	};
 	useEffect(() => {
 		console.log(localStorage.getItem('attendeeId'));
-		if (!JSON.parse(localStorage.getItem('attendeeId'))) {
+		if (!localStorage.getItem('attendeeId')) {
 			// let userexternalid = window.location.href //will update once patched to Aventri
 			let userexternalid = new URLSearchParams(window.location.search).get(
 				'userexternalid',
 			);
-			console.log('ID > ', userexternalid);
-			localStorage.setItem('attendeeId', userexternalid);
+			if (userexternalid) {
+				let id = userexternalid.split('_')[1];
+				console.log('ID > ', id);
+				localStorage.setItem('attendeeId', id);
+				setInitializeUser(true);
+			} else {
+				setViewConfig(VIEW_CONFIG.reference);
+			}
 		}
-		let userData = JSON.parse(localStorage.getItem('USER'));
-		if (
-			userData &&
-			Object.keys(userData).length &&
-			userData.id &&
-			userData.passphrase
-		) {
-			axios
-				.post(`${ENV_CONFIG.BASE_URL}${API_ENDPOINTS.VERIFY_USER}`, {
-					userId: userData.id,
-					passphrase: userData.passphrase,
-				})
-				.then(({ data }) => {
-					if (data && data.data) {
-						if (
-							getDateFormat(new Date(), true) >=
-							getDateFormat(EVENT_START_TIME, true)
-						) {
-							setViewConfig(VIEW_CONFIG.bid);
-							// clearInterval(interval);
-						} else setViewConfig(VIEW_CONFIG.wait);
-						localStorage.setItem('USER', JSON.stringify(data.data));
-					}
-				});
-		} else {
-			axios
-				.get(
-					`${ENV_CONFIG.BASE_URL}${
-						API_ENDPOINTS.INITIALIZE_USER
-					}?userexternalid=${localStorage.getItem('attendeeId')}`,
-				)
-				.then(({ data }) => {
-					if (data && data.data && Object.keys(data.data).length) {
-						console.log('Data > ', data);
-						localStorage.setItem('USER', JSON.stringify(data.data));
-						if (data.data.isActive) {
-							console.log('Active');
+	}, []);
+	useEffect(() => {
+		if (initializeUser) {
+			let userData = JSON.parse(localStorage.getItem('USER'));
+			if (
+				userData &&
+				Object.keys(userData).length &&
+				userData.id &&
+				userData.passphrase
+			) {
+				axios
+					.post(`${ENV_CONFIG.BASE_URL}${API_ENDPOINTS.VERIFY_USER}`, {
+						userId: userData.id,
+						passphrase: userData.passphrase,
+					})
+					.then(({ data }) => {
+						if (data && data.data) {
 							if (
 								getDateFormat(new Date(), true) >=
 								getDateFormat(EVENT_START_TIME, true)
@@ -88,22 +77,46 @@ const ParentWrapper = (props) => {
 								setViewConfig(VIEW_CONFIG.bid);
 								// clearInterval(interval);
 							} else setViewConfig(VIEW_CONFIG.wait);
-							// setViewConfig(VIEW_CONFIG.bid);
-						} else {
-							console.log('Redirect');
-							setViewConfig(VIEW_CONFIG.enterCode);
+							localStorage.setItem('USER', JSON.stringify(data.data));
+						}
+					});
+			} else {
+				axios
+					.get(
+						`${ENV_CONFIG.BASE_URL}${
+							API_ENDPOINTS.INITIALIZE_USER
+						}?userexternalid=${localStorage.getItem('attendeeId')}`,
+					)
+					.then(({ data }) => {
+						if (data && data.data && Object.keys(data.data).length) {
+							console.log('Data > ', data);
+							localStorage.setItem('USER', JSON.stringify(data.data));
+							if (data.data.isActive) {
+								console.log('Active');
+								if (
+									getDateFormat(new Date(), true) >=
+									getDateFormat(EVENT_START_TIME, true)
+								) {
+									setViewConfig(VIEW_CONFIG.bid);
+									// clearInterval(interval);
+								} else setViewConfig(VIEW_CONFIG.wait);
+								// setViewConfig(VIEW_CONFIG.bid);
+							} else {
+								console.log('Redirect');
+								setViewConfig(VIEW_CONFIG.enterCode);
+							}
+							// showErrorMsg(false);
 						}
 						// showErrorMsg(false);
-					}
-					// showErrorMsg(false);
-				})
-				.catch((e) => {
-					console.log('ERR > ', e);
-					notify('Uh Oh! Something went wrong.');
-					showErrorMsg(true);
-				});
+					})
+					.catch((e) => {
+						console.log('ERR > ', e);
+						notify('Uh Oh! Something went wrong.');
+						showErrorMsg(true);
+					});
+			}
 		}
-	}, []);
+	}, [initializeUser]);
 
 	useEffect(() => {
 		if (EVENT_START_TIME) {
@@ -165,7 +178,7 @@ const ParentWrapper = (props) => {
 			}}
 		>
 			<Logo width={150} height={'auto'} />
-			<div style={{marginTop:'20px'}}>
+			<div style={{ marginTop: '20px' }}>
 				<Text noMargin size={'md'} spacing={'md'} primaryColor>
 					{message}
 				</Text>
@@ -179,6 +192,10 @@ const ParentWrapper = (props) => {
 			setViewConfig(VIEW_CONFIG.bid);
 			// clearInterval(interval);
 		} else setViewConfig(VIEW_CONFIG.wait);
+	};
+	const handleReference = () => {
+		setViewConfig(VIEW_CONFIG.hold);
+		setInitializeUser(true);
 	};
 	console.log('VIEW > ', viewConfig);
 	switch (viewConfig) {
@@ -214,6 +231,8 @@ const ParentWrapper = (props) => {
 			);
 		case VIEW_CONFIG.wait:
 			return getHoldView("You're in! Please Wait for the auction to begin...");
+		case VIEW_CONFIG.reference:
+			return <Reference onFinish={handleReference} />;
 		default:
 			return getHoldView;
 	}
