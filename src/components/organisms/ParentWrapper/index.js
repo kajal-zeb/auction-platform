@@ -45,7 +45,8 @@ const ParentWrapper = (props) => {
   };
   useEffect(() => {
     console.log(localStorage.getItem('attendeeId'));
-    if (!localStorage.getItem('attendeeId')) {
+    const attendeeId = localStorage.getItem('attendeeId')
+    if (attendeeId == 'undefined' || attendeeId == 'null' || !attendeeId) {
       // let userexternalid = window.location.href //will update once patched to Aventri
       let userexternalid = new URLSearchParams(window.location.search).get(
         'userexternalid'

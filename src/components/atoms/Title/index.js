@@ -7,7 +7,7 @@ const Title = props => {
         ${styles[props.align || 'left']}
         ${props.uppercase ? styles.uppercase : ''}
         ${props.capitalize ? styles.capitalize : ''}`;
-    
+
     switch (props.tag) {
         case 'h1':
             markup = (
@@ -70,7 +70,7 @@ Title.propTypes = {
     children: PropTypes.oneOfType([PropTypes.array, PropTypes.string])
         .isRequired,
     spacing: PropTypes.oneOf(['xxs', 'xs', 'sm', 'md', 'lg', 'xl', 'none']),
-    theme: PropTypes.oneOf(['light', 'dark', 'red']),
+    theme: PropTypes.oneOf(['light', 'dark', 'red', 'orange']),
     capitalize: PropTypes.bool,
     align:PropTypes.oneOf(['center', 'left', 'right'])
 };
