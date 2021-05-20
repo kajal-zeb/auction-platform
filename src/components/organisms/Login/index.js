@@ -9,7 +9,7 @@ import { useHistory } from 'react-router-dom';
 import ENV_CONFIG from '../../../config';
 import Text from '../../atoms/Text/Text';
 
-const Login = () => {
+const Login = (props) => {
   const [form] = Form.useForm();
   const history = useHistory();
 
@@ -31,7 +31,8 @@ const Login = () => {
       .then(({ data }) => {
         if (data && data.data && Object.keys(data.data).length !== 0) {
           localStorage.setItem('USER', JSON.stringify(data.data));
-          history.push('/');
+          // history.push('/');
+          props.onFinish()
         } else {
           alert('Failed to verify code. ');
         }
