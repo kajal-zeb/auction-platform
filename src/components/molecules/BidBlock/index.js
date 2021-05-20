@@ -177,12 +177,12 @@ const Bid = (props) => {
 	const determineCurrentBid = () => {
 		if (
 			parseFloat(
-				JSON.parse(localStorage.getItem('currentbid'))['currentHighestBid'],
+				JSON.parse(localStorage.getItem('currentbid'))?.currentHighestBid,
 			)
 		) {
 			setCurrentBid(
 				parseFloat(
-					JSON.parse(localStorage.getItem('currentbid'))['currentHighestBid'],
+					JSON.parse(localStorage.getItem('currentbid'))?.currentHighestBid,
 				),
 			);
 		}
