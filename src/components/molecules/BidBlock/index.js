@@ -179,6 +179,10 @@ const Bid = (props) => {
 
 	const determineCurrentBid = () => {
 		setIncrementer(0)
+		console.log(parseFloat(
+					JSON.parse(localStorage.getItem('currentbid'))?.usdAmount,
+				));
+		console.log(props.data);
 		if (
 			parseFloat(
 				JSON.parse(localStorage.getItem('currentbid'))?.usdAmount,
@@ -264,7 +268,13 @@ const Bid = (props) => {
 						
 						<span style={{ flex: '1' }}>
 							<Text align={'center'} size={'md'} spacing={'sm'} noMargin>
-								~{Math.ceil(newBid * 2439)} Satoshi
+								{console.log(newBid)}
+								{currentBid>newBid?
+								<>~{Math.ceil(currentBid * 2439)} Satoshi</>
+								:
+								<>~{Math.ceil(newBid * 2439)} Satoshi</>
+								
+								}
 							</Text>
 						</span>
 					</div>

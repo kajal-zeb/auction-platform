@@ -305,7 +305,7 @@ useEffect(() => {
             <div className={classes.liveChatWrapper}>
               <LiveChat chats={chats} />
               <div className={`${showBidBlock ? 'show' : ''} transition-hide`}>
-                <Bid onClose={() => onSelectionChange(false)} />
+                <Bid data={chats[0]} onClose={() => onSelectionChange(false)} />
               </div>
             </div>
           </Content>
