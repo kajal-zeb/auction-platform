@@ -8,12 +8,15 @@ import Logo from '../Logo/Logo';
 
 const Header = (props) => {
 	const [highestBid, setHighestBid] = useState(null);
+    const io = require('socket.io-client');
 
 	useEffect(() => {
-		if (localStorage.getItem('currentbid')) {
-			setHighestBid(JSON.parse(localStorage.getItem('currentbid')));
-		}
-	}, [JSON.parse(localStorage.getItem('currentbid'))]);
+		const socket = io(process.env.BASE_URL);
+		socket.on('HighestBid', (data) => {
+            setHighestBid(data);
+
+        })
+    }, [JSON.parse(localStorage.getItem('currentbid'))]);
 
 	return (
 		<div>
@@ -32,7 +35,7 @@ const Header = (props) => {
 			</div>
 			<div className={`${parentClasses.footerStyle} ${classes.subHeaderStyle}`}>
 				<Title tag={'h2'} spacing={'none'} weight={600}>
-					{highestBid?.currentHighestBid} S
+					{highestBid?.currentHighestBid} Satoshis
 				</Title>
 				<div className={`flex`}>
 					{highestBid?.highestBidderName && (
