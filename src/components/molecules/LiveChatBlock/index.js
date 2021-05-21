@@ -1,27 +1,15 @@
-import React, { useEffect, useState } from 'react';
+import React, { memo, useEffect, useState } from 'react';
 import { Col, Row } from 'antd';
 import Text from '../../atoms/Text/Text';
 import { Avatar } from '../../atoms/index';
 import classes from './LiveChatBlock.module.scss';
-import ENV_CONFIG from '../../../config';
 import moment from 'moment';
-const user = JSON.parse(localStorage.getItem('USER')) || {};
+import ENV_CONFIG from '../../../config';
 const io = require('socket.io-client');
-const LiveChat = (props) => {
-	const [chats, setChats] = useState([]);
-	useEffect(() => {
-		const socket = io(ENV_CONFIG.BASE_URL);
-		socket.on('HighestBid', (data) => {
-			localStorage.setItem('currentbid', JSON.stringify(data));
-			let formattedData = {
-				name: data.highestBidderName,
-				comment: data.bidMessage,
-				time: data.bidTime,
-				bidAmount: data.currentHighestBid,
-			};
-			setChats((prev) => [...prev, formattedData]);
-		});
-	}, []);
+const user = JSON.parse(localStorage.getItem('USER')) || {};
+const LiveChat = ({chats}) => {
+	
+	
 	return (
 		<div className={`${classes.comments}`}>
 			{chats &&
@@ -40,7 +28,7 @@ const LiveChat = (props) => {
 							}`}
 						>
 							<Col className='gutter-row' flex={'52px'}>
-								<Avatar name={comment.name} width={40} height={40} />
+								<Avatar name={comment.name} style={{fontSize:'20px'}} width={40} height={40} />
 							</Col>
 							<Col className='gutter-row' flex={'auto'}>
 								<Text size={'md'} noMargin weight={600}>
@@ -49,26 +37,22 @@ const LiveChat = (props) => {
 								<Text
 									size={'md'}
 									noMargin
-									theme={comment.name !== user?.username ? 'gray' : undefined}
+									theme={comment.name !== user?.username ? 'light' : 'dark'}
 								>
 									{comment.comment}
 								</Text>
 							</Col>
-							<Col className='gutter-row' flex={'68px'}>
-								<Text
-									size={'sm'}
-									noMargin
-									align={'right'}
-									theme={comment.name !== user?.username ? 'gray' : undefined}
-								>
-									{/* if time is available, use moment from now */}
-									{moment(comment.time).fromNow()}
-								</Text>
-							</Col>
+							
+							<span
+								className={`${classes.time} ${comment.name !== user?.username ? classes.light :  classes.dark}`}
+							>
+								{/* if time is available, use moment from now */}
+								{moment(comment.time).fromNow()}
+							</span>
 						</Row>
 					);
 				})}
 		</div>
 	);
 };
-export default LiveChat;
+export default memo(LiveChat);

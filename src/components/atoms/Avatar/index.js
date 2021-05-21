@@ -33,7 +33,7 @@ const Avatar = (props) => {
 	return (
 		<>
 			<div
-				className={`${classes.avatar}`}
+				className={`${classes.avatar} ${props.isSmall ? classes.small:null}`}
 				style={{
 					background: background,
 					color: Color,

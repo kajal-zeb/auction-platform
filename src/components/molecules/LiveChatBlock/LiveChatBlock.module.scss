@@ -3,15 +3,32 @@
   height: 100%;
   overflow-y: scroll;
   overflow-x: hidden;
-  // display: flex;
-  // flex-direction: column-reverse;
+  display: flex;
+  flex-direction: column-reverse;
   .selected {
     background: var(--primary-dark);
     color: var(--bg-color) !important;
   }
   .chatItem{
+    position: relative;
     border-radius: 15px;
     padding: 10px;
     display: flex;
+    margin-bottom: 10px;
+  }
+}
+.time{
+  position: absolute;
+  right: 13px;
+  margin: 0;
+  top: 10px;
+  color: var(--gray);
+  text-align: right;
+  font-size: 1.2rem;
+  &.dark{
+    color: var(--bg-color);
+  }
+  &.light{
+    color: var(--gray);
   }
 }

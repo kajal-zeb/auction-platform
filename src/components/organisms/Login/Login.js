@@ -51,7 +51,7 @@ const Login = (props) => {
 						<Input
 							size={'large'}
 							className={`${classes.inputField}`}
-							placeHolder={'ENTER CODE'}
+							placeholder={'ENTER CODE'}
 						/>
 					</Form.Item>
 					<Form.Item className={'mt10'}>

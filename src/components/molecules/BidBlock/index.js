@@ -47,6 +47,9 @@ const Bid = (props) => {
 				setIncrementer(0);
 				setLoading(false);
 				setIsBidPlaced(true);
+				setTimeout(() => {
+					props.onClose();
+				}, 3000);
 			})
 			.catch((e) => {
 				setLoading(false);
@@ -174,6 +177,7 @@ const Bid = (props) => {
 	}, [localStorage.getItem('currentbid')]);
 
 	const determineCurrentBid = () => {
+		setIncrementer(0)
 		if (
 			parseFloat(
 				JSON.parse(localStorage.getItem('currentbid'))?.currentHighestBid,
@@ -184,6 +188,9 @@ const Bid = (props) => {
 					JSON.parse(localStorage.getItem('currentbid'))?.currentHighestBid,
 				),
 			);
+		}
+		if (JSON.parse(localStorage.getItem('currentbid'))?.bidBracket) {
+			setBidOptions(JSON.parse(localStorage.getItem('currentbid'))?.bidBracket);
 		}
 	};
 

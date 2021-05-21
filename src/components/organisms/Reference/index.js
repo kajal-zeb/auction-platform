@@ -32,7 +32,7 @@ const Reference = (props) => {
 						<Input
 							size={'large'}
 							className={`${classes.inputField}`}
-							placeHolder={'REFERENCE ID'}
+							placeholder={'REFERENCE ID'}
 						/>
 					</Form.Item>
 					<Form.Item className={'mt10'}>
