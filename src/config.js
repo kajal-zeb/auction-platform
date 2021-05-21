@@ -1,7 +1,8 @@
 const ENV_CONFIG = {
     development: {
         PORT: 3001,
-        BASE_URL: 'http://localhost:3003'
+        //BASE_URL: 'http://localhost:3003'
+        BASE_URL: 'https://auc.bitcoinpizza.com'
     },
     staging: {
         PORT: 3001,

@@ -37,7 +37,7 @@ const EVENT_END_TIME = JSON.parse(localStorage.getItem('USER'))
 // const EVENT_START_TIME = "2021-05-20T08:41:10.590Z"
 const ParentWrapper = (props) => {
   const [errorMsg, showErrorMsg] = useState(false);
-  const [viewConfig, setViewConfig] = useState(VIEW_CONFIG.bid);
+  const [viewConfig, setViewConfig] = useState(VIEW_CONFIG.hold);
   const [showBidBlock, setShowBidBlock] = useState(false);
   const [initializeUser, setInitializeUser] = useState(false);
   const [winnerMessage, showWinnerMessage] = useState(true);
@@ -89,7 +89,7 @@ const ParentWrapper = (props) => {
 		setChats((prev) => {
 			return( [...prev, newData].reverse())})
 	}
-//   useEffect(() => {
+useEffect(() => {
     if (initializeUser) {
       let userData = JSON.parse(localStorage.getItem('USER'));
       if (
@@ -149,27 +149,13 @@ const ParentWrapper = (props) => {
             }?userexternalid=${localStorage.getItem('attendeeId')}`
           )
           .then(({ data }) => {
-            if (data && data.data && Object.keys(data.data).length) {
+            console.log(data)
+            if (data && data.data && data.error == '0') {
               localStorage.setItem('Initialise', JSON.stringify(data.data));
-              if (data.data.isActive) {
-                console.log('Active');
-                if (
-                  getDateFormat(new Date(), true) >=
-                  getDateFormat(EVENT_START_TIME, true)
-                ) {
-					if(viewConfig !== VIEW_CONFIG.bid)  setViewConfig(VIEW_CONFIG.bid);
-                  // clearInterval(interval);
-                } else setViewConfig(VIEW_CONFIG.wait);
-                // setViewConfig(VIEW_CONFIG.bid);
-              } else {
-                console.log('Redirect');
                 setViewConfig(VIEW_CONFIG.enterCode);
-              }
-              // showErrorMsg(false);
             }
-			})
+        })
 
-            // showErrorMsg(false);
 
           .catch((e) => {
             console.log('ERR > ', e);
@@ -179,7 +165,7 @@ const ParentWrapper = (props) => {
 
       }
     }
-//   }, [initializeUser]);
+}, [initializeUser]);
 
   useEffect(() => {
     if (EVENT_START_TIME && EVENT_END_TIME) {

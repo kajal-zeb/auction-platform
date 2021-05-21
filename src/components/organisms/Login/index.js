@@ -46,8 +46,8 @@ const Login = (props) => {
     <div className={`${classes.loginView}`}>
       <Logo width={150} height={'auto'} />
       <div className={`${classes.inputArea}`}>
-        {JSON.parse(localStorage.getItem('Initialise'))['email'] && <Text noMargin size={'md'} spacing={'md'} primaryColor>
-          {`Enter the code sent on ${JSON.parse(localStorage.getItem('Initialise'))['email']}`}
+        {<Text noMargin size={'md'} spacing={'md'} primaryColor>
+          {`Enter the code sent on your registered email ID`}
         </Text>}
         <Form
           initialValues={{
