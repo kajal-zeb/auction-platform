@@ -3,17 +3,17 @@ import Logo from '../../atoms/Logo/Logo';
 import Sprite from '../../atoms/Sprite/Sprite';
 import classes from './Winner.module.scss';
 
-const Winner = () => {
+const Winner = ({data}) => {
 
     const [winner, setWinner] = useState(false);
-
+  console.log(data);
     useEffect(() => {
-        if (JSON.parse(localStorage.getItem('currentBid') || '{}')?.highestBidderId) {
-            if (JSON.parse(localStorage.getItem('currentBid') || '{}')?.highestBidderId === JSON.parse(localStorage.getItem('USER') || '{}')?.id) {
+        if (JSON.parse(localStorage.getItem('currentbid') || '{}')?.highestBidderId) {
+            if (JSON.parse(localStorage.getItem('currentbid') || '{}')?.highestBidderId === JSON.parse(localStorage.getItem('USER') || '{}')?.id) {
                 setWinner(true);
             }
         }
-    }, [JSON.parse(localStorage.getItem('currentBid') || '{}')])
+    }, [JSON.parse(localStorage.getItem('currentbid') || '{}')])
 
   return (
     <div className={`${classes.winner}`}>
@@ -25,16 +25,14 @@ const Winner = () => {
       <Sprite id={winner ? "winner-ribbon" : "loser-ribbon"} height={47} width={146} />
       <div className={`${classes.details}`}>
         <h2>
-          {JSON.parse(localStorage.getItem('currentBid'))?.currentHighestBid}
-          <br />
-          Satoshi
+          {data?.bidAmount} {" "} Satoshi
         </h2>
         <h3>
-        ~  {JSON.parse(localStorage.getItem('currentBid'))?.currentHighestBid * 0.00041364} USD
+        ~  {data?.usdAmount} USD
         </h3>
       </div>
       <div className={`${classes.winnerName}`}>
-          {!winner && <h2>{JSON.parse(localStorage.getItem('currentBid'))?.highestBidderName}</h2>}
+          {!winner && <h2>{data?.name}</h2>}
       </div>
       <div className={`${classes.end}`}>
           <h2>Auction ended.</h2>

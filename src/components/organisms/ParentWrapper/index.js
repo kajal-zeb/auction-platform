@@ -76,6 +76,8 @@ const ParentWrapper = (props) => {
 				comment: data.bidMessage,
 				time: data.bidTime,
 				bidAmount: data.currentHighestBid,
+				endTime: data.eventEndTime,
+				usdAmount:data.usdAmount
 			};
 			updateChat(formattedData);
 			// console.log([...chats,formattedData]);
@@ -113,7 +115,7 @@ useEffect(() => {
                 // clearInterval(interval);
               } else setViewConfig(VIEW_CONFIG.wait);
               localStorage.setItem('USER', JSON.stringify(data.data));
-              const interval = setInterval(() => {
+            //   const interval = setInterval(() => {
                 if (
                   getDateFormat(new Date(), true) <
                   getDateFormat(EVENT_START_TIME, true)
@@ -135,10 +137,10 @@ useEffect(() => {
                   }
                   setViewConfig(VIEW_CONFIG.winner);
                 }
-                  else {
-                      setViewConfig(VIEW_CONFIG.bid);
-                  }
-              }, 1000);
+				else {
+					setViewConfig(VIEW_CONFIG.bid);
+				}
+            //   }, 1000);
             }
           });
       } else {
@@ -169,7 +171,7 @@ useEffect(() => {
 
   useEffect(() => {
     if (EVENT_START_TIME && EVENT_END_TIME) {
-      const interval = setInterval(() => {
+    //   const interval = setInterval(() => {
         if (
           getDateFormat(new Date(), true) <
           getDateFormat(EVENT_START_TIME, true)
@@ -181,18 +183,19 @@ useEffect(() => {
           getDateFormat(EVENT_END_TIME, true)
 
         ) {
-          if (
-            JSON.parse(localStorage.getItem('currentbid')?.highestBidderId || '{}') ===
-            JSON.parse(localStorage.getItem('USER')?.id || '{}')
-          ) {
-            showWinnerMessage(true);
-          }
-          setViewConfig(VIEW_CONFIG.winner);
+			console.log('use effect winner case');
+        //   if (
+        //     JSON.parse(localStorage.getItem('currentbid')?.highestBidderId || '{}') ===
+        //     JSON.parse(localStorage.getItem('USER')?.id || '{}')
+        //   ) {
+        //     showWinnerMessage(true);
+        //   }
+        //   setViewConfig(VIEW_CONFIG.winner);
         }
           else {
               setViewConfig(VIEW_CONFIG.bid);
           }
-      }, 1000);
+    //   }, 1000);
     }
   }, [EVENT_START_TIME, EVENT_END_TIME]);
 
@@ -280,6 +283,10 @@ useEffect(() => {
     setViewConfig(VIEW_CONFIG.hold);
     setInitializeUser(true);
   };
+  const handleCountdownEnd = ()=>{
+	  setViewConfig(VIEW_CONFIG.winner);
+  }
+
   switch (viewConfig) {
     case VIEW_CONFIG.hold:
       return getHoldView(
@@ -292,7 +299,7 @@ useEffect(() => {
     case VIEW_CONFIG.bid:
       return (
         <Layout style={{ height: '100vh' }} id='auction'>
-          <Header data={chats[0]} />
+          <Header data={chats[0]} countdownEnds={handleCountdownEnd} />
           <Content style={{ height: 'calc(100% - 209px)' }}>
             <Art />
             <div className={classes.liveChatWrapper}>
@@ -316,7 +323,7 @@ useEffect(() => {
     case VIEW_CONFIG.reference:
       return <Reference onFinish={handleReference} />
     case VIEW_CONFIG.winner:
-      return <Winner />
+      return <Winner data={chats[0]}/>
     default:
       return getHoldView;
   }

@@ -5,20 +5,22 @@ import classes from './Header.module.scss';
 import parentClasses from '../../organisms/ParentWrapper/ParentWrapper.module.scss';
 import Avatar from '../Avatar/index';
 import Logo from '../Logo/Logo';
-
-const Header = ({data}) => {
+import Countdown from 'react-countdown';
+ 
+const Header = ({data,countdownEnds}) => {
 	const [highestBid, setHighestBid] = useState(null);
     const io = require('socket.io-client');
-
-	// useEffect(() => {
-	// 	console.log(this);
-	// 	if (localStorage.getItem('currentbid')) {
-	// 		// setHighestBid(JSON.parse(localStorage.getItem('currentbid')));
-	// 	}
-	// }, [JSON.parse(localStorage.getItem('currentbid'))]);
-	// if(!data){
-	// 	return null
-	// }
+	console.log(data);
+	
+	const renderer = ({ hours, minutes, seconds, completed }) => {
+		if (completed) {
+		  // Render a completed state
+		  return <p>hogya</p>;
+		} else {
+		  // Render a countdown
+		  return <span>{hours}:{minutes}:{seconds}</span>;
+		}
+	  };
 	return (
 		<div>
 			<div className={`header`}>
@@ -27,6 +29,15 @@ const Header = ({data}) => {
 					{/* <Text noMargin size={'lg'} weight={600}>
             1 Satoshi = 0.00000001 BTC
           </Text> */}
+					<div style={{marginLeft:'auto',fontSize:'14px'}}>
+					{data && data.endTime?
+						<p>
+							Ends in {" "}
+							<Countdown zeroPadTime={2} autoStart={true} date={data.endTime} renderer={renderer} onComplete={countdownEnds} />
+						</p>
+						:null
+					}
+					</div>
 				</div>
 			</div>
 			<div className={`text-align-center mt0`}>
