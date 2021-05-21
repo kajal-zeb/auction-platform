@@ -9,6 +9,9 @@
     background: var(--primary-dark);
     color: var(--bg-color) !important;
     margin-bottom: 10px;
+    b{
+      color: var(--bg-color);
+    }
   }
   .chatItem{
     position: relative;

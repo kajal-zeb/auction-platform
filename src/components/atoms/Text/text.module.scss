@@ -24,19 +24,19 @@ p.text {
     margin-bottom: 0;
   }
   // colors
-  &.dark {
+  &.dark, &.dark span {
     color: var(--text-color);
   }
-  &.light {
+  &.light,&.light span {
     color: #fff;
   }
-  &.red {
+  &.red , &.red span{
     color: var(--red);
   }
-  &.gray {
+  &.gray, &.gray span {
     color: var(--gray);
   }
-  &.lightgray {
+  &.lightgray, &.lightgray span {
     color: var(--light-gray);
   }
   &.yellow {

@@ -33,9 +33,7 @@ const Bid = (props) => {
 				{
 					userId: user.id,
 					username: user.username,
-					message: currentMessage.valuemsg
-						.replace('<b>', '')
-						.replace('</b>', ''),
+					message: currentMessage.valuemsg,
 					usdAmount: newBid,
 					inrAmount: Math.ceil(newBid * 72.76),
 					amount: Math.ceil(newBid * 2439),
@@ -296,7 +294,7 @@ const Bid = (props) => {
 								Your message
 							</Text>
 							<Text size={'md'} spacing={'md'} noMargin id='message'>
-								<span
+								<span 
 									dangerouslySetInnerHTML={{ __html: currentMessage.valuemsg }}
 								></span>
 							</Text>

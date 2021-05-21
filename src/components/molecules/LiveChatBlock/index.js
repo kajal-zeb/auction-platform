@@ -37,9 +37,9 @@ const LiveChat = ({chats}) => {
 								<Text
 									size={'sm'}
 									noMargin
-									theme={comment.name !== user?.username ? 'light' : 'dark'}
+									theme={comment.name === user?.username ? 'dark' : 'light'}
 								>
-									{comment.comment}
+									<span style={{color:'inherit'}} dangerouslySetInnerHTML={{ __html: comment.comment }}/>
 								</Text>
 							</Col>
 							
