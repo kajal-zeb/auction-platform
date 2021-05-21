@@ -29,9 +29,9 @@ const Header = ({data}) => {
           </Text> */}
 				</div>
 			</div>
-			<div className={`text-align-center`}>
-				<Text noMargin size={'md'} spacing={'md'}>
-					Highest Bid
+			<div className={`text-align-center mt0`}>
+				<Text  size={'md'} spacing={'xs'}>
+					Current Highest Bid
 				</Text>
 			</div>
 			<div className={`${parentClasses.footerStyle} ${classes.subHeaderStyle}`}>

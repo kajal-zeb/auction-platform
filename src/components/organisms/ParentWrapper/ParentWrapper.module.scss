@@ -17,7 +17,7 @@
 }
 .liveChatWrapper {
   width: 100%;
-  height: calc(100% - 55.9vw - 44px);
+  height: calc(100% - 55.9vw - 53px);
   position: relative;
 
   &::after {
@@ -41,7 +41,7 @@
 }
 .bidBlockWrapper {
   width: 100%;
-  height: calc(100% - 60.9vw - 44px);
+  height: calc(100% - 60.9vw - 53px);
   position: relative;
   &::after {
     content: '';

@@ -159,7 +159,7 @@ const Bid = (props) => {
 				`<b>${Math.ceil((currentBid + incrementer) * 2439)}</b>`,
 			),
 		});
-		setnewBid(currentBid + incrementer);
+		// setnewBid(currentBid + incrementer);
 	};
 	useEffect(() => {
 		if (incrementer && currentMessage != null)
@@ -206,7 +206,10 @@ const Bid = (props) => {
 	const changeCurrency = (bool) => {
 		setCurrency(bool ? 'inr' : 'usd');
 	}
-
+	const updateBid = (option)=>{
+		setIncrementer(option)
+		setnewBid(currentBid + option);
+	}
 	return (
 		<div className={`${classes.bidBlockContainer}`}>
 			{isBidPlaced ? (
@@ -245,33 +248,25 @@ const Bid = (props) => {
 					<div className={classes.newBid}>
 						<div className={classes.inputWrapper}>
 							<input value={currency === 'inr' ? Math.ceil((currentBid + incrementer) * 72.76) : (currentBid + incrementer)} disabled />
-							<Sprite
+							{/* <Sprite
 								id='refresh'
 								width={30}
 								height={25}
 								onClick={determineCurrentBid}
+							/> */}
+							<Switch 
+								checkedChildren="INR" 
+								unCheckedChildren="USD"
+								className={classes.currencySwitcher}
+								onClick={changeCurrency}
 							/>
 						</div>
 					</div>
 					<div style={{ display: 'flex', flex: '1 1 100%', marginBottom: '10px' }}>
-						<div>
-							<Switch 
-								checkedChildren="INR" 
-								unCheckedChildren="USD"
-								style={{
-									border: '1px solid var(--primary-color)',
-									background: 'var(--primary-color)',
-									color: 'var(--bg-color)',
-								}}
-								onClick={changeCurrency}
-							/>
-							<Text align={'center'} size={'md'} spacing={'nd'} noMargin>
-								Change Currency
-							</Text>
-						</div>
+						
 						<span style={{ flex: '1' }}>
-							<Text align={'right'} size={'md'} spacing={'sm'} noMargin>
-								~{Math.ceil(newBid * 2439)}Sats
+							<Text align={'center'} size={'lg'} spacing={'sm'} noMargin>
+								~{Math.ceil(newBid * 2439)} Satoshi
 							</Text>
 						</span>
 					</div>
@@ -284,7 +279,7 @@ const Bid = (props) => {
 								className={`${classes.bidOptions} ${
 									incrementer == option ? classes.selected : ''
 								}`}
-								onClick={() => setIncrementer(option)}
+								onClick={()=>updateBid(option)}
 							>
 								+{currency === 'inr' ? '₹' : '$'}{currency === 'inr' ? Math.ceil(option * 72.76) :option}
 							</span>

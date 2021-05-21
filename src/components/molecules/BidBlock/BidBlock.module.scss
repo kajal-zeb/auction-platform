@@ -130,6 +130,19 @@ b{
     margin-bottom: 30px;
   }
 }
+.currencySwitcher{
+  border: 1px solid var(--primary-color);
+    background: var(--primary-color);
+    color: var(--bg-color);
+    position: absolute;
+    right: 0;
+    top: 0;
+    height: 100%;
+    padding: 2px 10px;
+    color: #fff;
+    font-size: 20px;
+    min-width: 65px;
+}
 @keyframes pop{
   0%{
     transform: scale(1);
