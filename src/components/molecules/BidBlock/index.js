@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import Text from '../../atoms/Text/Text';
 import Title from '../../atoms/Title';
 import classes from './BidBlock.module.scss';
-import { Spin } from 'antd';
+import { Spin, Switch } from 'antd';
 import { LoadingOutlined } from '@ant-design/icons';
 import Sprite from '../../atoms/Sprite/Sprite';
 import axios from 'axios';
@@ -19,6 +19,7 @@ const Bid = (props) => {
 	const [incrementer, setIncrementer] = useState(0);
 	const [isBidPlaced, setIsBidPlaced] = useState(false);
 	const [bidPlacedMessage, setBidPlacedMessage] = useState('');
+	const [currency, setCurrency] = useState('');
 	const handlePlaceBid = async () => {
 		if (!currentMessage) {
 			return;
@@ -35,7 +36,9 @@ const Bid = (props) => {
 					message: currentMessage.valuemsg
 						.replace('<b>', '')
 						.replace('</b>', ''),
-					amount: newBid,
+					usdAmount: newBid,
+					inrAmount: Math.ceil(newBid * 72.76),
+					amount: Math.ceil(newBid * 2439),
 				},
 			)
 			.then(({ data }) => {
@@ -153,7 +156,7 @@ const Bid = (props) => {
 			...value,
 			valuemsg: value?.msg.replace(
 				'_____',
-				`<b>${currentBid + incrementer}</b>`,
+				`<b>${Math.ceil((currentBid + incrementer) * 2439)}</b>`,
 			),
 		});
 		setnewBid(currentBid + incrementer);
@@ -180,12 +183,12 @@ const Bid = (props) => {
 		setIncrementer(0)
 		if (
 			parseFloat(
-				JSON.parse(localStorage.getItem('currentbid'))?.currentHighestBid,
+				JSON.parse(localStorage.getItem('currentbid'))?.usdAmount,
 			)
 		) {
 			setCurrentBid(
 				parseFloat(
-					JSON.parse(localStorage.getItem('currentbid'))?.currentHighestBid,
+					JSON.parse(localStorage.getItem('currentbid'))?.usdAmount,
 				),
 			);
 		}
@@ -199,6 +202,10 @@ const Bid = (props) => {
 			props.onClose();
 		}
 	}, [bidPlacedMessage])
+
+	const changeCurrency = (bool) => {
+		setCurrency(bool ? 'inr' : 'usd');
+	}
 
 	return (
 		<div className={`${classes.bidBlockContainer}`}>
@@ -237,7 +244,7 @@ const Bid = (props) => {
 					</Title>
 					<div className={classes.newBid}>
 						<div className={classes.inputWrapper}>
-							<input value={currentBid + incrementer} disabled />
+							<input value={currency === 'inr' ? Math.ceil((currentBid + incrementer) * 72.76) : (currentBid + incrementer)} disabled />
 							<Sprite
 								id='refresh'
 								width={30}
@@ -246,9 +253,28 @@ const Bid = (props) => {
 							/>
 						</div>
 					</div>
-					<Text align={'center'} size={'md'} spacing={'sm'}>
-						~₹{(newBid * 0.04052356).toFixed(2)}
-					</Text>
+					<div style={{ display: 'flex', flex: '1 1 100%', marginBottom: '10px' }}>
+						<div>
+							<Switch 
+								checkedChildren="INR" 
+								unCheckedChildren="USD"
+								style={{
+									border: '1px solid var(--primary-color)',
+									background: 'var(--primary-color)',
+									color: 'var(--bg-color)',
+								}}
+								onClick={changeCurrency}
+							/>
+							<Text align={'center'} size={'md'} spacing={'nd'} noMargin>
+								Change Currency
+							</Text>
+						</div>
+						<span style={{ flex: '1' }}>
+							<Text align={'right'} size={'md'} spacing={'sm'} noMargin>
+								~{Math.ceil(newBid * 2439)}Sats
+							</Text>
+						</span>
+					</div>
 				</div>
 				<div className={'pad-all-10 flex'}>
 					{bidOptions.map((option, index) => {
@@ -260,7 +286,7 @@ const Bid = (props) => {
 								}`}
 								onClick={() => setIncrementer(option)}
 							>
-								+{option}
+								+{currency === 'inr' ? '₹' : '$'}{currency === 'inr' ? Math.ceil(option * 72.76) :option}
 							</span>
 						);
 					})}
