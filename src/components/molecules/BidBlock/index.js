@@ -247,7 +247,7 @@ const Bid = (props) => {
 					</Title>
 					<div className={classes.newBid}>
 						<div className={classes.inputWrapper}>
-							<input value={currency === 'inr' ? Math.ceil((currentBid + incrementer) * 72.76) : (currentBid + incrementer)} disabled />
+							<input value={currency === 'inr' ? Math.ceil((currentBid + incrementer) * 72.76) : Math.ceil(currentBid + incrementer)} disabled />
 							{/* <Sprite
 								id='refresh'
 								width={30}
