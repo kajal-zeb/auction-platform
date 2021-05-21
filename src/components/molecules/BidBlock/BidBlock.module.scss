@@ -1,5 +1,5 @@
 .bidBlockContainer {
-  height: 100%;
+  height: calc(100% - 10px);
   padding: 20px;
   overflow-y: scroll;
   overflow-x: hidden;
@@ -16,7 +16,7 @@
     padding: 0 20px;
     .lineRow{
       display: flex;
-      margin-bottom: 10px;
+      // margin-bottom: 10px;
       flex-wrap: nowrap;
       align-items: flex-start;
     }
@@ -61,7 +61,7 @@
     box-shadow: none;
     border: none;
     text-align: center;
-    font-size: 26px;
+    font-size: 20px;
     color: #fff;
     font-weight: 600;
     padding: 10px;
@@ -85,7 +85,7 @@ b{
 .bottomButtons{
   display: flex;
   align-items: center;
-  height: 60px;
+  height: 50px;
   margin: 0 -20px -20px -20px;
   .back{
     background-color: #3b3b3b;
@@ -94,14 +94,14 @@ b{
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    height: 60px;
+    height: 50px;
   }
   .confirm{
     background-color: #feac00;
     color: #000;
-    font-size: 24px;
+    font-size: 20px;
     font-weight: 600;
-    height: 60px;
+    height: 50px;
     flex: 1;
     display: inline-flex;
     align-items: center;

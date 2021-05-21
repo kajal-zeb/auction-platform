@@ -27,15 +27,15 @@ const LiveChat = ({chats}) => {
 								comment.name === user?.username ? classes.selected : undefined
 							}`}
 						>
-							<Col className='gutter-row' flex={'52px'}>
-								<Avatar name={comment.name} style={{fontSize:'20px'}} width={40} height={40} />
+							<Col className='gutter-row' flex={'30px'}>
+								<Avatar name={comment.name} style={{fontSize:'20px'}} width={30} height={30} />
 							</Col>
 							<Col className='gutter-row' flex={'auto'}>
 								<Text size={'md'} noMargin weight={600}>
 									{comment.name}
 								</Text>
 								<Text
-									size={'md'}
+									size={'sm'}
 									noMargin
 									theme={comment.name !== user?.username ? 'light' : 'dark'}
 								>

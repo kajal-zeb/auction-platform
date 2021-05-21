@@ -67,17 +67,17 @@ const Bid = (props) => {
 	// list of items
 	const list1 = [
 		{
-			width: 250,
+			width: 300,
 			key: 1,
 			msg: `"Kitna inaam rakhi hai sarkar hum par? Sardar pure _____ Satoshi”`,
 		},
 		{
-			width: 250,
+			width: 300,
 			key: 2,
 			msg: `"_____ Satoshi Bitcoin ki keemat tume kya jaano Ramesh babu!”`,
 		},
 		{
-			width: 250,
+			width: 300,
 			key: 3,
 			msg: `Mujhe nai khelna ye. Mai apna BAT le ke jaara hun`,
 		},
@@ -115,7 +115,7 @@ const Bid = (props) => {
 			msg: `"Kitna inaam rakhi hai sarkar hum par? Sardar pure _____ Satoshi”`,
 		},
 		{
-			width: 250,
+			width: 300,
 			key: 10,
 			msg: `"_____ Satoshi Bitcoin ki keemat tume kya jaano Ramesh babu!”`,
 		},
@@ -130,22 +130,22 @@ const Bid = (props) => {
 			msg: `Mujhe nai khelna ye. Mai apna BAT le ke jaara hun. _____`,
 		},
 		{
-			width: 250,
+			width: 300,
 			key: 13,
 			msg: `Mujhe nai khelna ye. Mai apna BAT le ke jaara hun. _____`,
 		},
 		{
-			width: 250,
+			width: 300,
 			key: 14,
 			msg: `Mujhe nai khelna ye. Mai apna BAT le ke jaara hun. _____`,
 		},
 		{
-			width: 250,
+			width: 300,
 			key: 15,
 			msg: `Mujhe nai khelna ye. Mai apna BAT le ke jaara hun. _____`,
 		},
 		{
-			width: 250,
+			width: 300,
 			key: 16,
 			msg: `Mujhe nai khelna ye. Mai apna BAT le ke jaara hun. _____`,
 		},
@@ -236,10 +236,10 @@ const Bid = (props) => {
 			<div>
 				<div>
 					<Title
-						tag='h2'
+						tag='h3'
 						theme='orange'
 						weight='600'
-						spacing={'sm'}
+						spacing={'xs'}
 						size={'lg'}
 						align={'center'}
 					>
@@ -265,7 +265,7 @@ const Bid = (props) => {
 					<div style={{ display: 'flex', flex: '1 1 100%', marginBottom: '10px' }}>
 						
 						<span style={{ flex: '1' }}>
-							<Text align={'center'} size={'lg'} spacing={'sm'} noMargin>
+							<Text align={'center'} size={'md'} spacing={'sm'} noMargin>
 								~{Math.ceil(newBid * 2439)} Satoshi
 							</Text>
 						</span>
@@ -287,7 +287,7 @@ const Bid = (props) => {
 					})}
 				</div>
 				<hr
-					style={{ width: '30%', margin: '20px auto', borderColor: '#aaa' }}
+					style={{ width: '30%', margin: '5px auto', borderColor: '#aaa' }}
 				/>
 				<div className={`text-align-center`}>
 					{currentMessage ? (
@@ -303,10 +303,10 @@ const Bid = (props) => {
 						</>
 					) : (
 						<>
-							<Text size={'lg'} spacing={'md'} weight={600} id='message'>
+							<Text size={'lg'} spacing={'xs'} weight={600} id='message'>
 								Choose a message
 							</Text>
-							<Text
+							{/* <Text
 								size={'md'}
 								spacing={'md'}
 								weight={600}
@@ -316,7 +316,7 @@ const Bid = (props) => {
 								<span style={{ color: 'var(--primary-color)' }}>
 									Choose a message to place bid!
 								</span>
-							</Text>
+							</Text> */}
 						</>
 					)}
 				</div>
