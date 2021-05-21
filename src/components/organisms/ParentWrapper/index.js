@@ -15,7 +15,7 @@ import Login from '../Login';
 import Reference from '../Reference';
 import Trophy from '../../atoms/Trophy/Trophy';
 const io = require('socket.io-client');
-
+import Winner from '../Winner/Winner';
 toast.configure();
 
 const { Content } = Layout;
@@ -237,7 +237,7 @@ const ParentWrapper = (props) => {
   };
 
   const notify = (message) => toast.warning(message);
-  const getHoldView = (message, trophy = false) => (
+  const getHoldView = (message) => (
     <div
       style={{
         height: '100vh',
@@ -248,14 +248,7 @@ const ParentWrapper = (props) => {
         justifyContent: 'center',
       }}
     >
-      <div
-        {...(trophy
-          ? { style: { position: 'fixed', top: '10px', left: '10px' } }
-          : undefined)}
-      >
-        <Logo width={150} height={'auto'} />
-      </div>
-      {trophy && winnerMessage && <Trophy width={150} height={'auto'} />}
+      <Logo width={150} height={'auto'} />
       <div style={{ marginTop: '20px' }}>
         <Text noMargin size={'md'} spacing={'md'} primaryColor>
           <span dangerouslySetInnerHTML={{ __html: message }} />
@@ -335,14 +328,9 @@ const ParentWrapper = (props) => {
     case VIEW_CONFIG.wait:
       return getHoldView("You're in! Please Wait for the auction to begin...");
     case VIEW_CONFIG.reference:
-      return <Reference onFinish={handleReference} />;
+      return <Reference onFinish={handleReference} />
     case VIEW_CONFIG.winner:
-      return getHoldView(
-        winnerMessage
-          ? 'Winner Winner Chicken Dinner!<br/>Congratulations on winning the auction.'
-          : 'The auction has ended.',
-        true
-      );
+      return <Winner />
     default:
       return getHoldView;
   }
