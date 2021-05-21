@@ -14,12 +14,12 @@ import 'react-toastify/dist/ReactToastify.css';
 import Login from '../Login';
 import Reference from '../Reference';
 import Trophy from '../../atoms/Trophy/Trophy';
-const io = require('socket.io-client');
 import Winner from '../Winner/Winner';
 toast.configure();
 
 const { Content } = Layout;
 const { Footer } = Layout;
+const io = require('socket.io-client');
 const VIEW_CONFIG = {
   hold: 'hold',
   enterCode: 'enterCode',
