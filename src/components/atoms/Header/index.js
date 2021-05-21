@@ -8,6 +8,7 @@ import Logo from '../Logo/Logo';
 
 const Header = ({data}) => {
 	const [highestBid, setHighestBid] = useState(null);
+    const io = require('socket.io-client');
 
 	// useEffect(() => {
 	// 	console.log(this);

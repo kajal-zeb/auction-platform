@@ -46,11 +46,8 @@ const ParentWrapper = (props) => {
 
   const onSelectionChange = (value) => {
     setShowBidBlock(value);
-    console.log(showBidBlock);
   };
   useEffect(() => {
-	  console.log('first parent render');
-    console.log(localStorage.getItem('attendeeId'));
     const attendeeId = localStorage.getItem('attendeeId')
     if (attendeeId == 'undefined' || attendeeId == 'null' || !attendeeId) {
       // let userexternalid = window.location.href //will update once patched to Aventri
@@ -59,12 +56,13 @@ const ParentWrapper = (props) => {
       );
       if (userexternalid) {
         let id = userexternalid.split('_')[1];
-        console.log('ID > ', id);
         localStorage.setItem('attendeeId', id);
         setInitializeUser(true);
       } else {
         setViewConfig(VIEW_CONFIG.reference);
       }
+    } else {
+        setInitializeUser(true);
     }
   }, []);
 
@@ -115,6 +113,32 @@ const ParentWrapper = (props) => {
                 // clearInterval(interval);
               } else setViewConfig(VIEW_CONFIG.wait);
               localStorage.setItem('USER', JSON.stringify(data.data));
+              const interval = setInterval(() => {
+                if (
+                  getDateFormat(new Date(), true) <
+                  getDateFormat(EVENT_START_TIME, true)
+                ) {
+                  console.log("3")
+                    setViewConfig(VIEW_CONFIG.wait);
+                }
+                else if(
+                  getDateFormat(new Date(), true) >
+                  getDateFormat(EVENT_END_TIME, true)
+
+                ) {
+                  console.log("4")
+                  if (
+                    JSON.parse(localStorage.getItem('currentbid')?.highestBidderId || '{}') ===
+                    JSON.parse(localStorage.getItem('USER')?.id || '{}')
+                  ) {
+                    showWinnerMessage(true);
+                  }
+                  setViewConfig(VIEW_CONFIG.winner);
+                }
+                  else {
+                      setViewConfig(VIEW_CONFIG.bid);
+                  }
+              }, 1000);
             }
           });
       } else {
@@ -126,7 +150,6 @@ const ParentWrapper = (props) => {
           )
           .then(({ data }) => {
             if (data && data.data && Object.keys(data.data).length) {
-              console.log('Data > ', data.data);
               localStorage.setItem('Initialise', JSON.stringify(data.data));
               if (data.data.isActive) {
                 console.log('Active');
@@ -144,49 +167,48 @@ const ParentWrapper = (props) => {
               }
               // showErrorMsg(false);
             }
+			})
+
             // showErrorMsg(false);
-          })
+
           .catch((e) => {
             console.log('ERR > ', e);
             notify('Uh Oh! Something went wrong.');
             showErrorMsg(true);
           });
+
       }
     }
 //   }, [initializeUser]);
 
-//   useEffect(() => {
-//     if (EVENT_START_TIME && EVENT_END_TIME) {
-//       console.log(
-//         getDateFormat(new Date(), true),
-//         getDateFormat(EVENT_START_TIME, true)
-//       );
-//       const interval = setInterval(() => {
-//         if (
-//           getDateFormat(new Date(), true) >=
-//           getDateFormat(EVENT_START_TIME, true)
-//         ) {
-// 			console.log(viewConfig);
-// 			if(viewConfig !== VIEW_CONFIG.bid)  setViewConfig(VIEW_CONFIG.bid);
-//           clearInterval(interval);
-//         } else if (
-//           getDateFormat(new Date(), true) <= getDateFormat(EVENT_END_TIME, true)
-//         ) {
-//           if (
-//             JSON.parse(localStorage.getItem('currentbid'))?.highestBidderId ===
-//             JSON.parse(localStorage.getItem('attendeeId'))
-//           ) {
-//             showWinnerMessage(true);
-//           }
-//           setViewConfig(VIEW_CONFIG.winner);
-//           clearInterval(interval);
-//         } else setViewConfig(VIEW_CONFIG.wait);
-//         return () => {
-//           clearInterval(interval);
-//         };
-//       }, 1000);
-//     }
-//   }, [EVENT_START_TIME, EVENT_END_TIME]);
+  useEffect(() => {
+    if (EVENT_START_TIME && EVENT_END_TIME) {
+      const interval = setInterval(() => {
+        if (
+          getDateFormat(new Date(), true) <
+          getDateFormat(EVENT_START_TIME, true)
+        ) {
+            setViewConfig(VIEW_CONFIG.wait);
+        }
+        else if(
+          getDateFormat(new Date(), true) >
+          getDateFormat(EVENT_END_TIME, true)
+
+        ) {
+          if (
+            JSON.parse(localStorage.getItem('currentbid')?.highestBidderId || '{}') ===
+            JSON.parse(localStorage.getItem('USER')?.id || '{}')
+          ) {
+            showWinnerMessage(true);
+          }
+          setViewConfig(VIEW_CONFIG.winner);
+        }
+          else {
+              setViewConfig(VIEW_CONFIG.bid);
+          }
+      }, 1000);
+    }
+  }, [EVENT_START_TIME, EVENT_END_TIME]);
 
   const getDateFormat = (date, time = false) => {
     const inputDate = new Date(date);
@@ -233,7 +255,7 @@ const ParentWrapper = (props) => {
       >
         <Logo width={150} height={'auto'} />
       </div>
-      {trophy && showWinnerMessage && <Trophy width={150} height={'auto'} />}
+      {trophy && winnerMessage && <Trophy width={150} height={'auto'} />}
       <div style={{ marginTop: '20px' }}>
         <Text noMargin size={'md'} spacing={'md'} primaryColor>
           <span dangerouslySetInnerHTML={{ __html: message }} />
@@ -242,25 +264,43 @@ const ParentWrapper = (props) => {
     </div>
   );
   const handleBid = () => {
+      const interval = setInterval(() => {
+        if (
+          getDateFormat(new Date(), true) <
+          getDateFormat(JSON.parse(localStorage.getItem('USER'))?.eventStartTime, true)
+        ) {
+            setViewConfig(VIEW_CONFIG.wait);
+        }
+        else if(
+          getDateFormat(new Date(), true) >
+          getDateFormat(JSON.parse(localStorage.getItem('USER'))?.eventEndTime, true)
+
+        ) {
+          if (
+            JSON.parse(localStorage.getItem('currentbid')?.highestBidderId || '{}') ===
+            JSON.parse(localStorage.getItem('USER')?.id || '{}')
+          ) {
+            showWinnerMessage(true);
+          }
+          setViewConfig(VIEW_CONFIG.winner);
+        }
+          else {
+              setViewConfig(VIEW_CONFIG.bid);
+          }
+      }, 1000)
+          /*
     if (
       getDateFormat(new Date(), true) >= getDateFormat(EVENT_START_TIME, true)
     ) {
 	if(viewConfig !== VIEW_CONFIG.bid)  setViewConfig(VIEW_CONFIG.bid);
       // clearInterval(interval);
     } else setViewConfig(VIEW_CONFIG.wait);
+    */
   };
   const handleReference = () => {
     setViewConfig(VIEW_CONFIG.hold);
     setInitializeUser(true);
   };
-//   const onBidUpdate =useCallback(() => {
-//     // handle the click event
-// 	setHighestBid(data)
-//   }, []);
-//   (data)=>{
-// 	setHighestBid(data)
-//   }
-  console.log('VIEW > ', viewConfig);
   switch (viewConfig) {
     case VIEW_CONFIG.hold:
       return getHoldView(
