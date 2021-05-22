@@ -59,93 +59,69 @@ const Bid = (props) => {
 				setIsBidPlaced(true);
 			});
 	};
-	// const list = [
-	//   {key: `"Kitna inaam rakhi hai sarkar hum par? Sardar pure _____ Satoshi”`,}
-	// ];
-	// list of items
 	const list1 = [
 		{
 			width: 300,
 			key: 1,
-			msg: `"Kitna inaam rakhi hai sarkar hum par? Sardar pure _____ Satoshi”`,
+			msg: `I'm going to make you a _____ Satoshi offer you can't refuse`
 		},
 		{
 			width: 300,
 			key: 2,
-			msg: `"_____ Satoshi Bitcoin ki keemat tume kya jaano Ramesh babu!”`,
+			msg: `Here's looking at you, _____ Satoshi.`,
 		},
 		{
 			width: 300,
 			key: 3,
-			msg: `Mujhe nai khelna ye. Mai apna BAT le ke jaara hun`,
+			msg: `Say Hello to my _____ satoshis!`,
 		},
 
 		{
 			width: 260,
 			key: 4,
-			msg: `Mujhe nai khelna ye. Mai apna BAT le ke jaara hun`,
+			msg: `A Lannister always pays his _____ Satoshis`,
 		},
 		{
 			width: 220,
 			key: 5,
-			msg: `Mujhe nai khelna ye. Mai apna BAT le ke jaara hun`,
+			msg: `There’s some good NFT's in this world, Mr. Frodo… and these _____ Satoshis are worth spending for it.`,
 		},
 		{
 			width: 220,
 			key: 6,
-			msg: `Mujhe nai khelna ye. Mai apna BAT le ke jaara hun`,
-		},
-		{
-			width: 220,
-			key: 7,
-			msg: `Mujhe nai khelna ye. Mai apna BAT le ke jaara hun`,
-		},
-		{
-			width: 200,
-			key: 8,
-			msg: `Mujhe nai khelna ye. Mai apna BAT le ke jaara hun`,
+			msg: `All we need is _____ Satoshi - John Lennon`,
 		},
 	];
 	const list2 = [
 		{
 			width: 260,
 			key: 9,
-			msg: `"Kitna inaam rakhi hai sarkar hum par? Sardar pure _____ Satoshi”`,
+			msg: `Tum hume NFT do, Hum tumhein _____ Satoshi denge!`,
 		},
 		{
 			width: 300,
 			key: 10,
-			msg: `"_____ Satoshi Bitcoin ki keemat tume kya jaano Ramesh babu!”`,
+			msg: `Kitna inaam rakhi hai sarkar NFT par? Sardar poore _____ Satoshi`,
 		},
 		{
 			width: 220,
 			key: 11,
-			msg: `Mujhe nai khelna ye. Mai apna BAT le ke jaara hun. _____`,
+			msg: `Main hu Teja, _____ Satoshi idhar hain`,
 		},
 		{
 			width: 220,
 			key: 12,
-			msg: `Mujhe nai khelna ye. Mai apna BAT le ke jaara hun. _____`,
+			msg: `_____ Satoshi abhi baaki hai mere dost!`,
 		},
 		{
 			width: 300,
 			key: 13,
-			msg: `Mujhe nai khelna ye. Mai apna BAT le ke jaara hun. _____`,
+			msg: `Ek baar jo maine _____ Satoshi de di, fir main apne aap ki bhi nahi sunta`,
 		},
 		{
 			width: 300,
 			key: 14,
-			msg: `Mujhe nai khelna ye. Mai apna BAT le ke jaara hun. _____`,
-		},
-		{
-			width: 300,
-			key: 15,
-			msg: `Mujhe nai khelna ye. Mai apna BAT le ke jaara hun. _____`,
-		},
-		{
-			width: 300,
-			key: 16,
-			msg: `Mujhe nai khelna ye. Mai apna BAT le ke jaara hun. _____`,
+			msg: `Jahan Panah, Tusi great ho _____ Satoshi Kubul karo!`,
 		},
 	];
 
