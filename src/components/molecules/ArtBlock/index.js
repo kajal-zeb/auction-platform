@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Image } from 'antd';
-import sample from '../../../assets/images/canvas.png';
+import sample from '../../../assets/images/nft-img.jpg';
 import classes from './ArtBlock.module.scss';
 import InnerImageZoom from 'react-inner-image-zoom';
 
@@ -16,7 +16,7 @@ const Art = (props) => {
       />
       <a
         target='_blank'
-        href='https://sandbox.poap.art/ERhmvK/-906.96958,-1782.65609@1'
+        href='https://app.poap.art/ByEl3W'
       >
         {'>> See full art <<'}
       </a>
